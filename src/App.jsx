@@ -7,6 +7,7 @@ import { useLang } from './i18n.jsx';
 import { ui } from './data/ui.js';
 
 const About = lazy(() => import('./pages/About.jsx'));
+const AreaPage = lazy(() => import('./pages/AreaPage.jsx'));
 const Timeline = lazy(() => import('./pages/Timeline.jsx'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage.jsx'));
 const NotFound = lazy(() => import('./pages/NotFound.jsx'));
@@ -46,6 +47,7 @@ export default function App() {
         <Suspense fallback={<div className="page-loading" aria-hidden="true" />}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/area/:id" element={<AreaPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/timeline" element={<Timeline />} />
             <Route path="/projects/:slug" element={<ProjectPage />} />

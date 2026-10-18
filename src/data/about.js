@@ -1,22 +1,17 @@
 export const about = {
   title: { en: 'About me', es: 'Sobre mí' },
-  lead: {
-    en: 'A bit about me as a professional and as a person: my story, what I am good at, what I am looking for and what I do when I am not working.',
-    es: 'Un poco sobre mí como profesional y como persona: mi historia, en qué soy bueno, qué busco y qué hago cuando no estoy trabajando.',
-  },
   story: {
     title: { en: 'Germán as a professional', es: 'Germán como profesional' },
     paragraphs: [
       {
-        en: 'I studied Marketing at Universidad Rey Juan Carlos, then joined **123tinta** as an intern and stayed: I have been working there since January 2024, almost three years now.',
-        es: 'Estudié Marketing en la Universidad Rey Juan Carlos, después entré en **123tinta** como becario y me quedé: trabajo allí desde enero de 2024, hace ya casi tres años.',
+        en: 'I studied Marketing at Universidad Rey Juan Carlos, then joined 123tinta.es as an intern and stayed: I have been working there since January 2024, almost three years now.',
+        es: 'Estudié Marketing en la Universidad Rey Juan Carlos, después entré en 123tinta.es como becario y me quedé: trabajo allí desde enero de 2024, hace ya casi tres años.',
       },
       {
         en: 'I am good with analytics, numbers and innovation. I specialise in digital marketing across different fields, with a fairly technical profile and experience with tools that are valued in the market.',
         es: 'Soy bueno en analítica, números e innovación. Estoy especializado en marketing digital en distintos campos, con un perfil bastante técnico y experiencia en herramientas valoradas en el mercado.',
       },
     ],
-    tools: ['Excel', 'Power Query', 'Power Pivot', 'SQL', 'Google Search Console', 'Google Analytics', 'Keyword Planner', 'Semrush', 'Screaming Frog', 'Lighthouse', 'HTML & CSS', 'JavaScript', 'React', 'Next.js', 'Supabase'],
   },
   strengths: {
     title: { en: 'Strengths', es: 'Puntos fuertes' },
@@ -75,14 +70,10 @@ export const about = {
   },
   hobbies: {
     title: { en: 'Hobbies', es: 'Hobbies y gustos' },
-    items: [
-      { icon: 'mountain', label: { en: 'Mountain hiking', es: 'Rutas por la montaña' }, note: { en: 'above all', es: 'sobre todo' } },
-      { icon: 'dumbbell', label: { en: 'Gym', es: 'Gimnasio' } },
-      { icon: 'glove', label: { en: 'Kickboxing', es: 'Kickboxing' } },
-      { icon: 'book', label: { en: 'Reading', es: 'Lectura' } },
-      { icon: 'code', label: { en: 'Personal projects', es: 'Proyectos personales' } },
-      { icon: 'plane', label: { en: 'Travelling', es: 'Viajar' } },
-    ],
+    text: {
+      en: 'I love sport (the gym, kickboxing and, above all, hiking in the mountains), reading, working on personal projects and travelling.',
+      es: 'Me encanta el deporte (gimnasio, kickboxing y, sobre todo, las rutas por la montaña), la lectura, hacer proyectos personales y viajar.',
+    },
   },
   photo: {
     caption: {

@@ -6,11 +6,10 @@ import Rich from './Rich.jsx';
 import Blocks from './Blocks.jsx';
 
 // Numbered steps: a short summary is always visible, the full content expands on click.
-export default function Steps({ title, items }) {
+export default function Steps({ items }) {
   const { t } = useLang();
   const baseId = useId();
   const [open, setOpen] = useState(() => new Set());
-  const allOpen = open.size === items.length;
 
   const toggle = (index) =>
     setOpen((prev) => {
@@ -20,19 +19,8 @@ export default function Steps({ title, items }) {
       return next;
     });
 
-  const toggleAll = () => setOpen(allOpen ? new Set() : new Set(items.map((_, i) => i)));
-
   return (
     <section className="steps">
-      <div className="steps__head">
-        <div>
-          <h2 className="steps__title">{t(title) || t(ui.steps)}</h2>
-          <p className="steps__hint">{t(ui.stepHint)}</p>
-        </div>
-        <button type="button" className="btn btn--ghost btn--small" onClick={toggleAll}>
-          {t(allOpen ? ui.collapseAll : ui.expandAll)}
-        </button>
-      </div>
       <ol className="steps__list">
         {items.map((step, i) => {
           const isOpen = open.has(i);

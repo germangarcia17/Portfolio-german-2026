@@ -1,6 +1,5 @@
-import { p, list, img, plus, alert, link } from './helpers.js';
+import { p, list, img, plus, alert } from './helpers.js';
 
-// Set this to the public URL of the SupplyForge demo shop to show a "visit" button.
 export const SUPPLYFORGE_URL = 'https://supplyforge.netlify.app/';
 
 const sql1 = `select w.code as almacen,
@@ -61,64 +60,6 @@ join products p on p.id = sa.product_id
 group by p.category
 order by tasa_devolucion_pct desc;`;
 
-const mStock = `// stock_actual: one row per product, with sales, supplier and reorder logic
-#"agrupar por sku, cat y name" = Table.Group(#"cambiar nombre columna sku2",
-    {"Stock_por_SKU", "name", "category", "price_ex_vat"},
-    {{"Disponible", each List.Sum([disponible]), type nullable number}}),
-
-#"combinar con ventas 90dias" = Table.NestedJoin(#"agrupar por sku, cat y name",
-    {"Stock_por_SKU"}, ventas_90d, {"sku"}, "ventas_90d", JoinKind.LeftOuter),
-
-#"cominar con proveedores" = Table.NestedJoin(#"Se expandió ventas_90d",
-    {"category"}, Proveedores, {"categoria"}, "Proveedores", JoinKind.LeftOuter),
-
-#"crear columna ventas diarias" = Table.AddColumn(..., "ventas_diarias",
-    each [unidades_netas_90d] / 90),
-#"reemplazar null por 0 en ventas" = Table.ReplaceValue(..., null, 0,
-    Replacer.ReplaceValue, {"unidades_netas_90d"}),
-#"crear cplumna cobertura" = Table.AddColumn(..., "dias_cobertura",
-    each [Disponible] / [ventas_diarias]),
-#"crear columna stock" = Table.AddColumn(..., "stock_objetivo",
-    each [ventas_diarias] * ([plazo_dias] + 30)),
-#"crear columna uds a pedir" = Table.AddColumn(..., "unidades_a_pedir",
-    each Number.RoundUp(List.Max({0, [stock_objetivo] - [Disponible]}))),
-#"crear columna coste pedido" = Table.AddColumn(..., "coste_pedido",
-    each [unidades_a_pedir] * [coste_pct] * [price_ex_vat]),
-
-#"crear columna estado" = Table.AddColumn(..., "estado", each
-    if [Disponible] = 0 then "ROTO"                                  // out of stock
-    else if [unidades_netas_90d] = 0 then "STOCK MUERTO"             // dead stock
-    else if [dias_cobertura] < ([plazo_dias] + 30) then "PEDIR YA"   // reorder now
-    else if [dias_cobertura] > 180 then "SOBRESTOCK"                 // overstock
-    else "OK"),
-
-#"Personalizada agregada" = Table.AddColumn(..., "valor_stock",
-    each [Disponible] * [price_ex_vat] * [coste_pct])                 // at purchase cost`;
-
-const mRisk = `// riesgo_almacen: % of products below the reorder point, per warehouse
-#"crear columna bajo minimo" = Table.AddColumn(#"Tipo cambiado", "bajo_minimo",
-    each if [disponible] < [reorder_point] then 1 else 0),
-#"Filas agrupadas" = Table.Group(#"crear columna bajo minimo", {"almacen"}, {
-    {"productos", each Table.RowCount(Table.Distinct(_)), Int64.Type},
-    {"bajo_minimo", each List.Sum([bajo_minimo]), type number}}),
-#"Personalizada agregada" = Table.AddColumn(#"Filas agrupadas", "pct_bajo_minimo",
-    each [bajo_minimo] / [productos])`;
-
-const xlFormulas = `// Dead stock value and its share of total stock value ("2.stock muerto")
-=SUMIFS(stock_actual!Q:Q, stock_actual!P:P, "STOCK MUERTO")
-=SUM(stock_actual!Q:Q)
-=A2/B2
-
-// ABC classification ("4. crear abc"), rows sorted by 90-day revenue
-E2: =SUM($D$2:D2)            // cumulative revenue
-F2: =E2/$J$1                 // cumulative %, J1 = SUM(D:D)
-G2: =IFS(F2<0.8, "Clase A", F2<0.95, "Clase B", F2>=0.95, "Clase C")
-
-// SKU lookup on the dashboard (B18 = SKU typed by the user)
-=XLOOKUP(B18, stock_actual!A:A, stock_actual!E:E, "Insertar SKU válido", 0)   // stock
-=XLOOKUP(B18, stock_actual!A:A, stock_actual!L:L, "Ingresar SKU válido", 0)   // days of cover
-=XLOOKUP(B18, stock_actual!A:A, stock_actual!P:P, "Ingresar SKU válido", 0)   // status`;
-
 const pqSteps = [
   ['Origen', 'Source: reads stock_actual.csv (UTF-8 encoding).', 'Origen: lee stock_actual.csv (codificación UTF-8).'],
   ['Encabezados promovidos', 'Promote the first row to column headers.', 'Convierte la primera fila en encabezados.'],
@@ -148,55 +89,71 @@ export default {
     en: 'An end-to-end analysis for a fasteners store with 5 warehouses: SQL extraction from Supabase, data preparation in Power Query and an Excel dashboard that answers what to reorder, what is not selling and which warehouse is at risk.',
     es: 'Un análisis de principio a fin para una tienda de tornillería con 5 almacenes: extracción SQL desde Supabase, preparación en Power Query y un dashboard en Excel que responde qué reponer, qué no se vende y qué almacén está en riesgo.',
   },
-  tags: ['SQL', 'Supabase', 'Power Query', 'Excel dashboard'],
   cover: { src: '/images/sf-dashboard.webp', width: 1600, height: 406 },
+  live: { href: SUPPLYFORGE_URL, label: { en: 'Visit the SupplyForge website', es: 'Visitar la web de SupplyForge' } },
+  tools: {
+    en: 'SQL (PostgreSQL) in Supabase, Power Query and Excel (pivot tables, pivot charts, slicers, XLOOKUP and SUMIFS).',
+    es: 'SQL (PostgreSQL) en Supabase, Power Query y Excel (tablas dinámicas, gráficos dinámicos, segmentadores, BUSCARX y SUMAR.SI.CONJUNTO).',
+  },
   body: [
     p(
-      '**SupplyForge** is a project I built to practise and to show a realistic analysis in my portfolio. It has two parts: an ecommerce website for fasteners and tools (the website itself is not the important part) and a database full of fake but realistic data, which is what the exercise below is built on.',
-      '**SupplyForge** es un proyecto que construí para practicar y mostrar un análisis realista en el portfolio. Tiene dos partes: una web de ecommerce de tornillería y herramientas (la web en sí no es lo importante) y una base de datos con datos falsos pero realistas, sobre la que se construye el ejercicio de abajo.'
+      'SupplyForge is a project I built to practise and to show a realistic analysis in my portfolio. It has two parts: an ecommerce website for fasteners and tools and a database with realistic data, which is what the analysis is built on.',
+      'SupplyForge es un proyecto que construí para practicar y mostrar un análisis realista en el portfolio. Tiene dos partes: una web de ecommerce de tornillería y herramientas y una base de datos con datos realistas, sobre la que se construye el análisis.'
     ),
-    plus(
-      'All the data and the website are fake. The site was created to give credibility to the portfolio project and to show the important elements of an ecommerce website: product recommendations, asking for an account after the cart so the customer does not abandon, product families on the product page to jump quickly to other sizes and colours, categorisation, offers and discounts, search and filters, the brand’s strengths highlighted, and a retailer/B2B option with a tool to add a list of products from Excel or quickly by hand.',
-      'Todos los datos y la web son falsos. La web se creó para dar credibilidad al proyecto del portfolio y mostrar los elementos importantes al crear un ecommerce: recomendaciones, pedir la cuenta después del carrito para que el cliente no abandone, familias de producto en la ficha para moverse rápido a otros tamaños y colores, categorización, ofertas y descuentos, buscador y filtros, ventajas y puntos fuertes de la marca resaltados y opción para retailers o B2B con herramienta para añadir un listado desde Excel o de forma rápida.',
-      { en: 'Ecommerce strategy behind the site', es: 'Estrategia de ecommerce detrás de la web' }
-    ),
-    link(SUPPLYFORGE_URL, 'Visit the SupplyForge website', 'Visitar la web de SupplyForge'),
-    { type: 'h', text: { en: 'The brief', es: 'El encargo' } },
-    p(
-      'SupplyForge sells fasteners and tools online from **5 warehouses in Spain** (Madrid, Barcelona, Valencia, Seville and Bilbao). Before the November B2B campaign, the Head of Operations needs an Excel workbook for Monday’s meeting that answers three questions:',
-      'SupplyForge vende tornillería y herramientas online desde **5 almacenes en España** (Madrid, Barcelona, Valencia, Sevilla y Bilbao). Antes de la campaña B2B de noviembre, el Head of Operations necesita un Excel para la reunión del lunes que responda a tres preguntas:'
-    ),
-    {
-      type: 'questions',
-      items: [
-        { en: 'Which products must be reordered now, how many units, and what will the order cost?', es: '¿Qué productos hay que reponer ya, cuántas unidades y cuánto costará el pedido?' },
-        { en: 'How much money is tied up in stock that is not selling?', es: '¿Cuánto dinero hay inmovilizado en stock que no se vende?' },
-        { en: 'Which warehouse is in the worst stock position?', es: '¿Qué almacén está en peor situación de stock?' },
-      ],
-    },
-    p(
-      '**Scope**: categories fasteners and anchors, excluding products flagged as unavailable. **Sources**: the Supabase database behind the website (tables products, warehouses, stock, sales and orders, with sales from 11 Oct 2025 to 10 Oct 2026) and a supplier file from Purchasing with lead time and purchase cost per category.',
-      '**Alcance**: categorías fasteners y anchors, excluyendo los productos marcados como no disponibles. **Fuentes**: la base de datos Supabase de la web (tablas products, warehouses, stock, sales y orders, con ventas del 11 oct 2025 al 10 oct 2026) y un archivo de Compras con el plazo y el coste de compra por categoría.'
-    ),
-    {
-      type: 'table',
-      caption: { en: 'Definitions to follow', es: 'Definiciones a seguir' },
-      head: [{ en: 'Term', es: 'Término' }, { en: 'Definition', es: 'Definición' }],
-      rows: [
-        [{ en: 'Available', es: 'Disponible' }, { en: 'Units in stock minus reserved units', es: 'Unidades en stock menos unidades reservadas' }],
-        [{ en: 'Recent sales', es: 'Ventas recientes' }, { en: 'Units sold minus units returned in the last 90 days', es: 'Unidades vendidas menos devueltas en los últimos 90 días' }],
-        [{ en: 'Target stock', es: 'Stock objetivo' }, { en: 'What sells during the supplier lead time plus 30 days of campaign', es: 'Lo que se vende durante el plazo del proveedor más 30 días de campaña' }],
-        [{ en: 'Below minimum', es: 'Bajo mínimo' }, { en: 'Available below the warehouse reorder point', es: 'Disponible por debajo del punto de pedido del almacén' }],
-        [{ en: 'Stock value', es: 'Valor de stock' }, { en: 'Always at purchase cost, not at selling price', es: 'Siempre a coste de compra, no a precio de venta' }],
-      ],
-    },
     alert(
-      'Most of the working files (SQL aliases, Power Query steps, sheet names) are in Spanish, while the final dashboard and the instructions are in English. Everything is explained in English on this page. Also, to be transparent: my SQL level is basic, so for the code I looked up some keywords on Google.',
-      'La mayoría de archivos de trabajo (alias SQL, pasos de Power Query, nombres de hojas) están en español, mientras que el dashboard final y las instrucciones están en inglés. Todo está explicado en esta página. Además, para ser transparente: mi nivel de SQL es básico, así que para el código busqué ayuda en Google con algunas keywords.'
+      'None of the data is real: it was generated with AI for this exercise. The website is not a real shop either; it exists to give the project context and credibility.',
+      'Ningún dato es real: se generaron con IA para este ejercicio. La web tampoco es una tienda real; existe para dar contexto y credibilidad al proyecto.'
     ),
     {
       type: 'steps',
       items: [
+        {
+          title: { en: 'Website creation', es: 'Creación de la web' },
+          summary: {
+            en: 'A B2C and B2B retail store that shows the key elements of an ecommerce website.',
+            es: 'Una tienda retail B2C y B2B que muestra los elementos clave de un ecommerce.',
+          },
+          blocks: [
+            p(
+              'The website was created to give credibility to the project and to show the important elements of an ecommerce website:',
+              'La web se creó para dar credibilidad al proyecto y mostrar los elementos importantes al crear un ecommerce:'
+            ),
+            list([
+              { en: 'A retail store for both consumers (B2C) and businesses (B2B).', es: 'Una tienda retail tanto para particulares (B2C) como para empresas (B2B).' },
+              { en: 'Product recommendations.', es: 'Recomendaciones de producto.' },
+              { en: 'Asking for an account after the cart, so the customer does not abandon.', es: 'Pedir la cuenta después del carrito, para que el cliente no abandone.' },
+              { en: 'Product families on the product page, to jump quickly to other sizes and colours.', es: 'Familias de producto en la ficha, para moverse rápido a otros tamaños y colores.' },
+              { en: 'Categorisation, offers and discounts, search and filters.', es: 'Categorización, ofertas y descuentos, buscador y filtros.' },
+              { en: 'The brand’s strengths highlighted.', es: 'Ventajas y puntos fuertes de la marca resaltados.' },
+              { en: 'A retailer/B2B option with a tool to add a list of products from Excel or quickly by hand.', es: 'Opción para retailers o B2B con herramienta para añadir un listado desde Excel o de forma rápida.' },
+            ]),
+          ],
+        },
+        {
+          title: { en: 'The brief', es: 'El encargo' },
+          summary: {
+            en: 'A brief based on real exercises: three questions before the November B2B campaign.',
+            es: 'Un encargo basado en ejercicios reales: tres preguntas antes de la campaña B2B de noviembre.',
+          },
+          blocks: [
+            p(
+              'I generated the brief based on real exercises. SupplyForge sells fasteners and tools from 5 warehouses in Spain, and before the November B2B campaign the Head of Operations needs an Excel workbook that answers three questions:',
+              'Generé el encargo en base a ejercicios reales. SupplyForge vende tornillería y herramientas desde 5 almacenes en España, y antes de la campaña B2B de noviembre el Head of Operations necesita un Excel que responda a tres preguntas:'
+            ),
+            {
+              type: 'questions',
+              items: [
+                { en: 'Which products must be reordered now, how many units, and what will the order cost?', es: '¿Qué productos hay que reponer ya, cuántas unidades y cuánto costará el pedido?' },
+                { en: 'How much money is tied up in stock that is not selling?', es: '¿Cuánto dinero hay inmovilizado en stock que no se vende?' },
+                { en: 'Which warehouse is in the worst stock position?', es: '¿Qué almacén está en peor situación de stock?' },
+              ],
+            },
+            list([
+              { en: '**Categories**: fasteners and anchors, excluding products flagged as unavailable.', es: '**Categorías**: fasteners y anchors, excluyendo los productos marcados como no disponibles.' },
+              { en: '**Sources**: the Supabase database behind the website (products, warehouses, stock, sales and orders, with sales from 11 Oct 2025 to 10 Oct 2026) and a supplier file from Purchasing with lead time and purchase cost per category.', es: '**Fuentes**: la base de datos Supabase de la web (products, warehouses, stock, sales y orders, con ventas del 11 oct 2025 al 10 oct 2026) y un archivo de Compras con el plazo y el coste de compra por categoría.' },
+            ]),
+          ],
+        },
         {
           title: { en: 'SQL: extraction from Supabase', es: 'SQL: extracción desde Supabase' },
           summary: {
@@ -282,8 +239,8 @@ export default {
             img('sf-csv-files', { en: 'The four exported CSV files', es: 'Los cuatro CSV exportados' }, { en: 'The four exports from Supabase.', es: 'Los cuatro exports de Supabase.' }),
             img('sf-pq-suppliers', { en: 'Supplier table in Power Query with lead times and cost percentages', es: 'Tabla de proveedores en Power Query con plazos y porcentajes de coste' }, { en: 'Purchasing file: supplier, lead time (days) and purchase cost as % of the selling price, per category.', es: 'Archivo de Compras: proveedor, plazo (días) y coste de compra como % del precio de venta, por categoría.' }),
             p(
-              'The main query, `stock_actual`, turns 12,425 product–warehouse rows into **one row per product (4,962)** and adds every calculation the brief asks for. These are its applied steps, translated:',
-              'La consulta principal, `stock_actual`, convierte las 12.425 filas producto–almacén en **una fila por producto (4.962)** y añade todos los cálculos que pide el encargo. Estos son sus pasos aplicados, traducidos:'
+              'The main query, `stock_actual`, turns 12,425 product–warehouse rows into one row per product (4,962) and adds every calculation the brief asks for. These are its applied steps, translated:',
+              'La consulta principal, `stock_actual`, convierte las 12.425 filas producto–almacén en una fila por producto (4.962) y añade todos los cálculos que pide el encargo. Estos son sus pasos aplicados, traducidos:'
             ),
             {
               type: 'table',
@@ -299,12 +256,6 @@ export default {
                 img('sf-pq-steps', { en: 'List of applied steps in the stock_actual query', es: 'Lista de pasos aplicados de la consulta stock_actual' }, { en: 'The full list of applied steps.', es: 'La lista completa de pasos aplicados.' }),
               ],
             },
-            { type: 'code', lang: 'm', title: { en: 'Key M code from stock_actual', es: 'Código M clave de stock_actual' }, code: mStock },
-            p(
-              'A second query, `riesgo_almacen`, keeps the product–warehouse level to measure risk per warehouse: it flags every row where available is below the reorder point, groups by warehouse and calculates the % of products below minimum.',
-              'Una segunda consulta, `riesgo_almacen`, mantiene el nivel producto–almacén para medir el riesgo por almacén: marca cada fila cuyo disponible está por debajo del punto de pedido, agrupa por almacén y calcula el % de productos bajo mínimo.'
-            ),
-            { type: 'code', lang: 'm', title: { en: 'riesgo_almacen (warehouse risk)', es: 'riesgo_almacen (riesgo por almacén)' }, code: mRisk },
             plus(
               'Everything refreshes with a single click: when new CSV files replace the old ones, Data → Refresh All runs every query, pivot table and chart again.',
               'Todo se actualiza con un solo clic: cuando los CSV nuevos sustituyen a los antiguos, Datos → Actualizar todo vuelve a ejecutar cada consulta, tabla dinámica y gráfico.'
@@ -326,8 +277,10 @@ export default {
               { en: '**SKU lookup**: typing a SKU shows its stock, days of cover and status (XLOOKUP).', es: '**Buscador de SKU**: al escribir un SKU muestra su stock, días de cobertura y estado (BUSCARX).' },
               { en: '**Trend chart** of monthly revenue by category, with category and month slicers.', es: '**Gráfico de tendencia** de ingresos mensuales por categoría, con segmentadores de categoría y mes.' },
             ]),
-            { type: 'code', lang: 'excel', title: { en: 'Key formulas', es: 'Fórmulas clave' }, code: xlFormulas },
-            img('sf-dashboard', { en: 'The final Excel dashboard', es: 'El dashboard final en Excel' }, { en: 'The dashboard sheet: KPIs, warehouse ranking, ABC, SKU search and the sales trend with slicers.', es: 'La hoja de dashboard: KPIs, ranking de almacenes, ABC, buscador de SKU y la tendencia de ventas con segmentadores.' }),
+            p(
+              'The final dashboard brings it all together on one page. You can see it below, together with the workbook to download.',
+              'El dashboard final lo reúne todo en una página. Puedes verlo abajo, junto con el Excel para descargar.'
+            ),
           ],
         },
         {
@@ -341,13 +294,28 @@ export default {
       ],
     },
     {
-      type: 'download',
-      href: '/files/supplyforge-analysis.xlsx',
-      label: { en: 'Download the Excel workbook', es: 'Descargar el Excel' },
-      note: {
-        en: 'The full workbook with the dashboard, pivot tables and Power Query queries (1.7 MB). The queries point to local CSV paths, so they won’t refresh on your computer, but every table and result is there.',
-        es: 'El libro completo con el dashboard, las tablas dinámicas y las consultas de Power Query (1,7 MB). Las consultas apuntan a rutas locales de CSV, así que no se actualizarán en tu ordenador, pero todas las tablas y resultados están ahí.',
-      },
+      type: 'group',
+      title: { en: 'The results workbook', es: 'El Excel de resultados' },
+      blocks: [
+        p(
+          'For anyone who wants to see the results in detail, this is how the final dashboard looks, and the full workbook is available to download.',
+          'Para quien quiera ver los resultados en detalle, así queda el dashboard final, y el libro completo está disponible para descargar.'
+        ),
+        img('sf-dashboard', { en: 'The final Excel dashboard', es: 'El dashboard final en Excel' }, { en: 'The dashboard sheet: KPIs, warehouse ranking, ABC, SKU search and the sales trend with slicers.', es: 'La hoja de dashboard: KPIs, ranking de almacenes, ABC, buscador de SKU y la tendencia de ventas con segmentadores.' }),
+        alert(
+          'Most of the working files (SQL aliases, Power Query steps, sheet names) are in Spanish, while the final dashboard and the instructions are in English. Everything is explained in English on this page. Also, to be transparent: my SQL level is basic, so for the code I looked up some keywords on Google.',
+          'La mayoría de archivos de trabajo (alias SQL, pasos de Power Query, nombres de hojas) están en español, mientras que el dashboard final y las instrucciones están en inglés. Todo está explicado en esta página. Además, para ser transparente: mi nivel de SQL es básico, así que para el código busqué ayuda en Google con algunas keywords.'
+        ),
+        {
+          type: 'download',
+          href: '/files/supplyforge-analysis.xlsx',
+          label: { en: 'Download the Excel workbook', es: 'Descargar el Excel' },
+          note: {
+            en: 'The full workbook with the dashboard, pivot tables and Power Query queries (1.7 MB). The queries point to local CSV paths, so they won’t refresh on your computer, but every table and result is there.',
+            es: 'El libro completo con el dashboard, las tablas dinámicas y las consultas de Power Query (1,7 MB). Las consultas apuntan a rutas locales de CSV, así que no se actualizarán en tu ordenador, pero todas las tablas y resultados están ahí.',
+          },
+        },
+      ],
     },
   ],
 };

@@ -13,13 +13,6 @@ const kindLabel = {
   study: { en: 'Education', es: 'Formación' },
   project: { en: 'Project', es: 'Proyecto' },
 };
-const copy = {
-  lead: {
-    en: 'My experience and studies, from the most recent to the oldest. What I am still doing today comes first.',
-    es: 'Mi experiencia y mis estudios, de lo más reciente a lo más antiguo. Lo que sigo haciendo hoy aparece primero.',
-  },
-};
-
 export default function Timeline() {
   const { t } = useLang();
   useDocumentTitle(t(ui.nav.timeline));
@@ -29,7 +22,6 @@ export default function Timeline() {
       <header className="page-hero">
         <div className="container">
           <h1 className="page-title">{t(ui.nav.timeline)}</h1>
-          <p className="page-lead">{t(copy.lead)}</p>
           <ul className="legend">
             {Object.keys(kindIcon).map((k) => (
               <li key={k} className={`legend__item legend__item--${k}`}>

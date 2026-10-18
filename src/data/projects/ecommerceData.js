@@ -4,31 +4,28 @@ export default {
   slug: 'ecommerce-sales-analysis',
   kind: 'page',
   areas: ['ecommerce', 'data'],
-  org: '123tinta',
+  org: '123tinta.es',
   title: { en: 'Real ecommerce data case: a self-updating sales analysis', es: 'Caso real de datos de ecommerce: un análisis de ventas que se actualiza solo' },
   summary: {
     en: 'I automated the monthly and weekly sales and turnover comparisons I used to build by hand, with a folder, Power Query, Power Pivot and Excel. Drop the data in, refresh, filter.',
     es: 'Automaticé las comparativas mensuales y semanales de ventas y turnover que antes hacía a mano, con una carpeta, Power Query, Power Pivot y Excel. Meter los datos, actualizar y filtrar.',
   },
-  tags: ['Power Query', 'Power Pivot', 'Pivot tables', 'Excel'],
   cover: { src: '/images/data-6-pies.webp', width: 1368, height: 628 },
+  tools: { en: 'Excel, Power Query, Power Pivot, pivot tables, pivot charts, slicers and a small macro.', es: 'Excel, Power Query, Power Pivot, tablas dinámicas, gráficos dinámicos, segmentadores y una pequeña macro.' },
   body: [
     p(
-      '**Why this project exists.** It is based on a real application in my job. We compare sales and turnover month by month, sometimes even week by week. Doing the same analysis over and over meant rebuilding the biggest table by hand and reformatting the data every time. So I built a system where I only have to **drop the new files into a folder, click refresh and filter whatever I want**.',
-      '**Por qué existe este proyecto.** Está basado en una aplicación real en mi trabajo. Comparamos ventas y turnover de forma mensual, o incluso semanal. Repetir el mismo análisis una y otra vez suponía rehacer a mano la tabla más grande y dar formato a los datos cada vez. Así que construí un sistema en el que solo tengo que **meter los archivos nuevos en una carpeta, actualizar y filtrar lo que quiera**.'
+      '**Why this project exists.** It is based on a real application in my job. We compare sales and turnover month by month, sometimes even week by week. Doing the same analysis over and over meant rebuilding the biggest table by hand and reformatting the data every time. So I built a system where I only have to drop the new files into a folder, click refresh and filter whatever I want.',
+      '**Por qué existe este proyecto.** Está basado en una aplicación real en mi trabajo. Comparamos ventas y turnover de forma mensual, o incluso semanal. Repetir el mismo análisis una y otra vez suponía rehacer a mano la tabla más grande y dar formato a los datos cada vez. Así que construí un sistema en el que solo tengo que meter los archivos nuevos en una carpeta, actualizar y filtrar lo que quiera.'
     ),
     alert(
       'The dataset shown here simulates the work I do at my company, so no confidential figures are disclosed. The process and the tools are exactly the ones I use.',
       'Los datos que se muestran simulan el trabajo que hago en mi empresa, para no mostrar cifras confidenciales. El proceso y las herramientas son exactamente los que utilizo.'
     ),
-    {
-      type: 'kpis',
-      items: [
-        { value: '17,156', label: { en: 'units analysed (2024 – Sep 2026)', es: 'unidades analizadas (2024 – sep 2026)' } },
-        { value: '1 click', label: { en: 'to refresh every table and chart', es: 'para actualizar todas las tablas y gráficos' } },
-        { value: '0', label: { en: 'manual reformatting when new data arrives', es: 'reformateos manuales al llegar datos nuevos' } },
-      ],
-    },
+    list([
+      { en: '17,156 units analysed, from 2024 to September 2026.', es: '17.156 unidades analizadas, de 2024 a septiembre de 2026.' },
+      { en: 'One click refreshes every table and chart.', es: 'Un solo clic actualiza todas las tablas y gráficos.' },
+      { en: 'No manual reformatting when new data arrives.', es: 'Ningún reformateo manual cuando llegan datos nuevos.' },
+    ]),
     {
       type: 'steps',
       items: [
@@ -40,8 +37,8 @@ export default {
           },
           blocks: [
             p(
-              'The data is transformed in Power Query using **Get Data → From Folder**. These are the files in the folder: the historical file plus monthly or weekly exports, and more can be added at any time. The query is filtered by extension so that `.txt` and `.md` files (notes, readmes) never enter the model.',
-              'Los datos se transforman en Power Query con **Obtener datos → Desde carpeta**. Estos son los archivos de la carpeta: el histórico más los exports mensuales o semanales, y se pueden añadir más en cualquier momento. La consulta se filtra por extensión para que los `.txt` y `.md` (notas, readmes) nunca entren en el modelo.'
+              'The data is transformed in Power Query using Get Data → From Folder. These are the files in the folder: the historical file plus monthly or weekly exports, and more can be added at any time. The query is filtered by extension so that `.txt` and `.md` files (notes, readmes) never enter the model.',
+              'Los datos se transforman en Power Query con Obtener datos → Desde carpeta. Estos son los archivos de la carpeta: el histórico más los exports mensuales o semanales, y se pueden añadir más en cualquier momento. La consulta se filtra por extensión para que los `.txt` y `.md` (notas, readmes) nunca entren en el modelo.'
             ),
             img('data-1-folder', { en: 'Power Query folder source listing four Excel sales files', es: 'Origen de carpeta en Power Query con cuatro archivos de ventas' }, { en: 'Folder source: every Excel file in the folder is combined automatically.', es: 'Origen de carpeta: todos los Excel de la carpeta se combinan automáticamente.' }),
           ],
@@ -88,8 +85,8 @@ export default {
           },
           blocks: [
             p(
-              'With the data loaded into the model, the required tasks are done in Excel. First, a sales table by year that **expands into months** and can be filtered by any years or months.',
-              'Con los datos cargados en el modelo, las tareas se realizan en Excel. Primero, una tabla de ventas por año que **se despliega por meses** y se puede filtrar por los años o meses que se quiera.'
+              'With the data loaded into the model, the required tasks are done in Excel. First, a sales table by year that expands into months and can be filtered by any years or months.',
+              'Con los datos cargados en el modelo, las tareas se realizan en Excel. Primero, una tabla de ventas por año que se despliega por meses y se puede filtrar por los años o meses que se quiera.'
             ),
             alert(
               'Seasonality matters. This analysis was done in October 2026, so 2026 only has data up to September. To make the comparison valid, other years are compared over the same period, not as full years.',
@@ -130,8 +127,8 @@ export default {
             ),
             img('data-6-pies', { en: 'Pie charts of units by category and by brand for 2024, 2025 and 2026', es: 'Gráficos circulares de unidades por categoría y por marca en 2024, 2025 y 2026' }, { en: 'Category (top) and brand (bottom) share per year.', es: 'Peso por categoría (arriba) y por marca (abajo) cada año.' }),
             p(
-              'A button linked to a small macro runs **Refresh All**, so new data flows through Power Query, the model, the pivot tables and the charts instantly.',
-              'Un botón vinculado a una pequeña macro ejecuta **Actualizar todo**, de modo que los datos nuevos pasan por Power Query, el modelo, las tablas dinámicas y los gráficos al instante.'
+              'A button linked to a small macro runs Refresh All, so new data flows through Power Query, the model, the pivot tables and the charts instantly.',
+              'Un botón vinculado a una pequeña macro ejecuta Actualizar todo, de modo que los datos nuevos pasan por Power Query, el modelo, las tablas dinámicas y los gráficos al instante.'
             ),
             img('data-6-bars', { en: 'Bar chart comparing 2025 and 2026 sales for selected categories, with slicer and refresh button', es: 'Gráfico de barras comparando ventas 2025 y 2026 de las categorías seleccionadas, con segmentador y botón de actualizar' }, { en: 'Slicer + “Refresh all” macro button.', es: 'Segmentador + botón con macro “Actualizar todo”.' }),
           ],
@@ -149,9 +146,9 @@ export default {
             ),
             list([
               { en: '**Own brand on the rise**: it has grown considerably in recent months, cannibalising HP, the top brand.', es: '**La marca propia sube**: ha crecido considerablemente en los últimos meses, canibalizando a HP, la marca top.' },
-              { en: '**3D filament is the fastest-growing category**, while paper and ink cartridges are falling: categories to investigate and review.', es: '**Los filamentos son la categoría que más crece**, mientras que el papel y los cartuchos de tinta bajan: categorías a investigar y revisar.' },
+              { en: '**Categories to watch**: 3D filament is the fastest-growing category, while paper and ink cartridges are falling and need to be investigated and reviewed.', es: '**Categorías a vigilar**: los filamentos son la categoría que más crece, mientras que el papel y los cartuchos de tinta bajan y hay que investigarlos y revisarlos.' },
               { en: '**Top brands**: Brother, HP and Kyocera.', es: '**Marcas top**: Brother, HP y Kyocera.' },
-              { en: '**Average selling price** has dropped by €4 in three years.', es: '**El precio medio de venta** ha bajado 4 € en tres años.' },
+              { en: '**Average selling price**: down €4 in three years.', es: '**Precio medio de venta**: ha bajado 4 € en tres años.' },
               { en: '**A stock-out, made visible**: a top reference suddenly dropped to zero sales in one month. It was not demand: it was out of stock (not available = nothing sold). In that same month its XL alternative sold far more than usual. The value of always having an alternative.', es: '**Una rotura de stock, a la vista**: una referencia top cayó de golpe a cero ventas un mes. No era la demanda: estaba sin stock (no disponible = no se vende nada). Ese mismo mes, su alternativa XL vendió mucho más de lo habitual. Lo bueno de tener una alternativa.' },
             ]),
             img('data-7-hp-stockout', { en: 'HP black toner at zero sales in July while the high-capacity version peaks', es: 'Tóner negro HP con cero ventas en julio mientras la versión de alta capacidad alcanza su pico' }, { en: 'July: standard HP black toner = 0 units (stock-out); high-capacity version = 36, its best month.', es: 'Julio: tóner negro HP estándar = 0 unidades (rotura); versión de alta capacidad = 36, su mejor mes.' }),

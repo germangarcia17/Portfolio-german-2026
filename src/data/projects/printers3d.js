@@ -1,30 +1,29 @@
-import { p, list, link, plus } from './helpers.js';
+import { p, list, plus } from './helpers.js';
 
 export default {
   slug: '3d-printers',
   kind: 'page',
   areas: ['ecommerce', 'category'],
-  org: '123tinta',
+  org: '123tinta.es',
   title: { en: 'Launching the 3D printer category', es: 'Lanzamiento de la categoría de impresoras 3D' },
   summary: {
-    en: 'From choosing suppliers to analysing results: how I built a new category that sold 50+ printers in its first month and pulled filament sales up by 11%.',
-    es: 'Desde elegir proveedores hasta analizar resultados: cómo construí una categoría nueva que vendió más de 50 impresoras en su primer mes e impulsó las ventas de filamento un 11%.',
+    en: 'Creation of a category that sold more than 50 printers in its first month and grew the filament category by 11%.',
+    es: 'Creación de una categoría que ha vendido más de 50 impresoras en su primer mes y ha logrado que la categoría de filamentos crezca un 11%.',
   },
-  tags: ['Category management', 'Sourcing', 'Pricing', 'Product content'],
-  metric: { value: '+50', label: { en: 'printers sold in month one', es: 'impresoras vendidas el primer mes' } },
+  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
+  live: {
+    href: 'https://www.123tinta.es/Filamento-3D/Impresoras-3D-p4037008.html',
+    label: { en: 'See the live category', es: 'Ver la categoría en vivo' },
+  },
   body: [
     p(
-      '123tinta already sold 3D printing filament, but not the printers that use it. I was in charge of opening the 3D printer category end to end: finding the right suppliers, choosing which printers to list, creating every product page and measuring the result.',
-      '123tinta ya vendía filamento para impresión 3D, pero no las impresoras que lo utilizan. Me encargué de abrir la categoría de impresoras 3D de principio a fin: encontrar los proveedores adecuados, elegir qué impresoras listar, crear cada ficha de producto y medir el resultado.'
+      '123tinta.es already sold 3D printing filament, but not the printers that use it. I was in charge of opening the 3D printer category end to end: finding the right suppliers, choosing which printers to list, creating every product page and measuring the result.',
+      '123tinta.es ya vendía filamento para impresión 3D, pero no las impresoras que lo utilizan. Me encargué de abrir la categoría de impresoras 3D de principio a fin: encontrar los proveedores adecuados, elegir qué impresoras listar, crear cada ficha de producto y medir el resultado.'
     ),
-    {
-      type: 'kpis',
-      items: [
-        { value: '+50', label: { en: 'printers sold in the first month', es: 'impresoras vendidas el primer mes' } },
-        { value: '+11%', label: { en: 'growth of the filament category in that same month', es: 'crecimiento de la categoría de filamentos ese mismo mes' } },
-        { value: '4', label: { en: 'phases, owned end to end', es: 'fases, gestionadas de principio a fin' } },
-      ],
-    },
+    list([
+      { en: 'More than 50 printers sold in the first month.', es: 'Más de 50 impresoras vendidas el primer mes.' },
+      { en: 'The filament category grew 11% in that same month.', es: 'La categoría de filamentos creció un 11% ese mismo mes.' },
+    ]),
     {
       type: 'steps',
       items: [
@@ -35,10 +34,7 @@ export default {
             es: 'Selección de proveedores en base a disponibilidad, precio y surtido.',
           },
           blocks: [
-            p(
-              'A new category only works if it can be kept in stock at a competitive price. I compared potential suppliers on three criteria:',
-              'Una categoría nueva solo funciona si se puede mantener en stock a un precio competitivo. Comparé los posibles proveedores con tres criterios:'
-            ),
+            p('I compared potential suppliers on three criteria:', 'Comparé los posibles proveedores con tres criterios:'),
             list([
               { en: '**Availability**: real stock and delivery times, so the category would not open with products we could not ship.', es: '**Disponibilidad**: stock real y plazos de entrega, para no abrir la categoría con productos que no pudiéramos enviar.' },
               { en: '**Price**: purchase cost and the margin it leaves against the market price.', es: '**Precio**: coste de compra y margen resultante frente al precio de mercado.' },
@@ -87,8 +83,8 @@ export default {
           },
           blocks: [
             p(
-              'The category was a success, accumulating **more than 50 printers sold in its first month**. It also boosted the category we already had: **filament sales grew 11%** in that same first month, because every new printer owner needs material to print with.',
-              'La categoría resultó un éxito, acumulando **más de 50 impresoras vendidas en el primer mes**. Además potenció la categoría que ya teníamos: **las ventas de filamento crecieron un 11%** ese mismo primer mes, porque cada nuevo dueño de una impresora necesita material para imprimir.'
+              'The category was a success, accumulating more than 50 printers sold in its first month. It also boosted the category we already had: filament sales grew 11% in that same first month.',
+              'La categoría resultó un éxito, acumulando más de 50 impresoras vendidas en el primer mes. Además potenció la categoría que ya teníamos: las ventas de filamento crecieron un 11% ese mismo primer mes.'
             ),
           ],
         },
@@ -98,6 +94,5 @@ export default {
       'This project also appears under Category Manager: it combines sourcing, assortment, content and pricing decisions in one launch.',
       'Este proyecto también aparece en Category Manager: combina decisiones de aprovisionamiento, surtido, contenido y precio en un mismo lanzamiento.'
     ),
-    link('https://www.123tinta.es/Filamento-3D/Impresoras-3D-p4037008.html', 'See the live category', 'Ver la categoría en vivo'),
   ],
 };

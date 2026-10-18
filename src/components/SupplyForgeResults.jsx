@@ -19,56 +19,35 @@ const REVENUE = {
   electrical: [105508, 157538, 184136, 202279, 202196, 243428, 245902, 225878, 200908, 185449, 157937, 142863],
 };
 
-const WAREHOUSES = [
-  { code: 'BCN', name: { en: 'Barcelona', es: 'Barcelona' }, pct: 13.81, below: 347, total: 2513 },
-  { code: 'SVQ', name: { en: 'Seville', es: 'Sevilla' }, pct: 12.78, below: 315, total: 2464 },
-  { code: 'MAD', name: { en: 'Madrid', es: 'Madrid' }, pct: 12.6, below: 323, total: 2563 },
-  { code: 'VLC', name: { en: 'Valencia', es: 'Valencia' }, pct: 11.93, below: 294, total: 2464 },
-  { code: 'BIO', name: { en: 'Bilbao', es: 'Bilbao' }, pct: 10.78, below: 261, total: 2421 },
-];
-
-const ABC = [
-  { cls: 'A', skus: 19.95, revenue: 4579851 },
-  { cls: 'B', skus: 26.54, revenue: 858827 },
-  { cls: 'C', skus: 53.51, revenue: 286264 },
-];
-
 const copy = {
-  kpiTitle: { en: 'The four dashboard KPIs', es: 'Los cuatro KPIs del dashboard' },
-  kpis: [
-    { value: '€164,376', valueEs: '164.376 €', label: { en: 'Order amount', es: 'Importe del pedido' }, note: { en: '11,221 units · 451 SKUs', es: '11.221 unidades · 451 SKUs' } },
-    { value: '€1.02M', valueEs: '1,02 M€', label: { en: 'Dead stock value', es: 'Valor del stock muerto' }, note: { en: '1.35% of €75.6M stock value · 61 SKUs', es: '1,35% de 75,6 M€ de stock · 61 SKUs' } },
-    { value: '12.4%', valueEs: '12,4%', label: { en: 'Product-warehouse positions below minimum', es: 'Posiciones producto-almacén bajo mínimo' }, note: { en: '1,540 of 12,425', es: '1.540 de 12.425' } },
-    { value: '279', valueEs: '279', label: { en: 'Stock-outs', es: 'Roturas de stock' }, note: { en: 'SKUs with 0 units available', es: 'SKUs con 0 unidades disponibles' } },
-  ],
-  answersTitle: { en: 'Answers for Monday’s meeting', es: 'Respuestas para la reunión del lunes' },
+  answersTitle: { en: 'Answers', es: 'Respuestas' },
   answers: [
     {
       q: { en: 'What to reorder now?', es: '¿Qué reponer ya?' },
       a: {
-        en: '**451 SKUs** (279 out of stock + 172 below their target cover): **11,221 units for €164,376** at purchase cost. The biggest lines are timber construction screws and bulk boxes of DIN 912 socket screws.',
-        es: '**451 SKUs** (279 rotos + 172 por debajo de su cobertura objetivo): **11.221 unidades por 164.376 €** a coste de compra. Las líneas más grandes son tornillos de construcción para madera y cajas a granel de tornillos DIN 912.',
+        en: '451 SKUs (279 out of stock + 172 below their target cover): 11,221 units for €164,376 at purchase cost. The biggest lines are timber construction screws and bulk boxes of DIN 912 socket screws.',
+        es: '451 SKUs (279 rotos + 172 por debajo de su cobertura objetivo): 11.221 unidades por 164.376 € a coste de compra. Las líneas más grandes son tornillos de construcción para madera y cajas a granel de tornillos DIN 912.',
       },
     },
     {
       q: { en: 'How much money is stuck?', es: '¿Cuánto dinero está parado?' },
       a: {
-        en: '**€1.02M in dead stock** (no sales in 90 days), 1.35% of the €75.6M stock value. The bigger story is overstock: **4,212 SKUs have more than 180 days of cover** and hold €74.1M, 98% of the stock value.',
-        es: '**1,02 M€ en stock muerto** (sin ventas en 90 días), el 1,35% de los 75,6 M€ de stock. Lo más llamativo es el sobrestock: **4.212 SKUs tienen más de 180 días de cobertura** y suman 74,1 M€, el 98% del valor del stock.',
+        en: '€1.02M in dead stock (no sales in 90 days), 1.35% of the €75.6M stock value. The bigger story is overstock: 4,212 SKUs have more than 180 days of cover and hold €74.1M, 98% of the stock value.',
+        es: '1,02 M€ en stock muerto (sin ventas en 90 días), el 1,35% de los 75,6 M€ de stock. Lo más llamativo es el sobrestock: 4.212 SKUs tienen más de 180 días de cobertura y suman 74,1 M€, el 98% del valor del stock.',
       },
     },
     {
       q: { en: 'Which warehouse is worst?', es: '¿Qué almacén está peor?' },
       a: {
-        en: '**Barcelona (BCN)**: 13.8% of its products are below the reorder point. Bilbao is the healthiest at 10.8%.',
-        es: '**Barcelona (BCN)**: el 13,8% de sus productos está por debajo del punto de pedido. Bilbao es el más sano, con un 10,8%.',
+        en: 'Barcelona (BCN): 13.8% of its products are below the reorder point. Bilbao is the healthiest at 10.8%.',
+        es: 'Barcelona (BCN): el 13,8% de sus productos está por debajo del punto de pedido. Bilbao es el más sano, con un 10,8%.',
       },
     },
   ],
   recoTitle: { en: 'My recommendation', es: 'Mi recomendación' },
   reco: {
-    en: 'Place the €164k order before the campaign, starting with the A-class stock-outs, and prioritise transfers to Barcelona. At the same time, the real lever for cash is not buying less but **liquidating the dead stock and the overstock** (the products with the most days of cover), in three ways:',
-    es: 'Lanzar el pedido de 164 k€ antes de la campaña, empezando por las roturas de clase A, y priorizar los traspasos hacia Barcelona. A la vez, la verdadera palanca de caja no es comprar menos sino **liquidar el stock muerto y el sobrestock** (los productos con más días de cobertura), de tres formas:',
+    en: 'Place the €164k order before the campaign, starting with the A-class stock-outs, and prioritise transfers to Barcelona. At the same time, the real lever for cash is not buying less but liquidating the dead stock and the overstock (the products with the most days of cover), in three ways:',
+    es: 'Lanzar el pedido de 164 k€ antes de la campaña, empezando por las roturas de clase A, y priorizar los traspasos hacia Barcelona. A la vez, la verdadera palanca de caja no es comprar menos sino liquidar el stock muerto y el sobrestock (los productos con más días de cobertura), de tres formas:',
   },
   levers: [
     {
@@ -93,19 +72,6 @@ const copy = {
       },
     },
   ],
-  rankTitle: { en: 'Warehouse ranking · % of products below minimum', es: 'Ranking de almacenes · % de productos bajo mínimo' },
-  status: {
-    critical: { en: 'Worst', es: 'Peor' },
-    warning: { en: 'Watch', es: 'Vigilar' },
-    good: { en: 'Best', es: 'Mejor' },
-  },
-  abcTitle: { en: 'ABC classification by 90-day revenue', es: 'Clasificación ABC por ingresos de 90 días' },
-  abcSkus: { en: 'of SKUs', es: 'de los SKUs' },
-  abcRevenue: { en: 'of revenue', es: 'de los ingresos' },
-  abcNote: {
-    en: 'One in five products brings in 80% of the revenue: those are the SKUs that can never run out.',
-    es: 'Uno de cada cinco productos genera el 80% de los ingresos: son los SKUs que nunca pueden faltar.',
-  },
   trendTitle: { en: 'Monthly net revenue by category', es: 'Ingresos netos mensuales por categoría' },
   trendNote: {
     en: 'Oct 2025 – Sep 2026, all categories, all channels. *October starts on the 11th, when the sales data begins. Hover or tap the chart to see each month.',
@@ -125,12 +91,6 @@ const copy = {
 function formatEuro(value, lang) {
   if (value >= 1e6) return lang === 'es' ? `${(value / 1e6).toFixed(2).replace('.', ',')} M€` : `€${(value / 1e6).toFixed(2)}M`;
   return lang === 'es' ? `${Math.round(value / 1000)} k€` : `€${Math.round(value / 1000)}k`;
-}
-
-function statusOf(i, total) {
-  if (i === 0) return 'critical';
-  if (i === total - 1) return 'good';
-  return 'warning';
 }
 
 function TrendChart() {
@@ -228,21 +188,9 @@ function TrendChart() {
 
 export default function SupplyForgeResults() {
   const { t, lang } = useLang();
-  const maxPct = 15;
 
   return (
     <div className="sf-results">
-      <h3 className="sf-results__title">{t(copy.kpiTitle)}</h3>
-      <dl className="kpis kpis--four">
-        {copy.kpis.map((kpi, i) => (
-          <div className="kpi" key={i}>
-            <dt className="kpi__label">{t(kpi.label)}</dt>
-            <dd className="kpi__value">{lang === 'es' ? kpi.valueEs : kpi.value}</dd>
-            <dd className="kpi__note">{t(kpi.note)}</dd>
-          </div>
-        ))}
-      </dl>
-
       <h3 className="sf-results__title">{t(copy.answersTitle)}</h3>
       <div className="answers">
         {copy.answers.map((item, i) => (
@@ -251,45 +199,6 @@ export default function SupplyForgeResults() {
             <Rich as="p" className="answer__a" text={item.a} />
           </div>
         ))}
-      </div>
-
-      <div className="sf-grid">
-        <section className="sf-panel">
-          <h3 className="sf-results__title">{t(copy.rankTitle)}</h3>
-          <ol className="ranking">
-            {WAREHOUSES.map((w, i) => {
-              const status = statusOf(i, WAREHOUSES.length);
-              return (
-                <li key={w.code} className={`ranking__row ranking__row--${status}`}>
-                  <span className="ranking__name"><strong>{w.code}</strong> {t(w.name)}</span>
-                  <span className="ranking__bar" aria-hidden="true">
-                    <span style={{ width: `${(w.pct / maxPct) * 100}%` }} />
-                  </span>
-                  <span className="ranking__value">{lang === 'es' ? `${w.pct.toFixed(1).replace('.', ',')}%` : `${w.pct.toFixed(1)}%`}</span>
-                  {status !== 'warning' && <span className={`status status--${status}`}>{t(copy.status[status])}</span>}
-                </li>
-              );
-            })}
-          </ol>
-        </section>
-        <section className="sf-panel">
-          <h3 className="sf-results__title">{t(copy.abcTitle)}</h3>
-          <ul className="abc">
-            {ABC.map((row) => {
-              const share = (row.revenue / ABC.reduce((s, r) => s + r.revenue, 0)) * 100;
-              const fmt = (n) => n.toFixed(0);
-              return (
-                <li key={row.cls} className="abc__row">
-                  <span className={`abc__badge abc__badge--${row.cls}`}>{row.cls}</span>
-                  <span className="abc__text">
-                    <strong>{fmt(row.skus)}%</strong> {t(copy.abcSkus)} → <strong>{fmt(share)}%</strong> {t(copy.abcRevenue)} ({formatEuro(row.revenue, lang)})
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
-          <p className="sf-panel__note">{t(copy.abcNote)}</p>
-        </section>
       </div>
 
       <section className="sf-panel">

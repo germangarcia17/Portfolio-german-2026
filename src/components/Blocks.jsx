@@ -43,7 +43,7 @@ function Block({ block }) {
     case 'alert':
       return <Callout variant="alert" title={block.title} text={block.text} />;
     case 'steps':
-      return <Steps title={block.title} items={block.items} />;
+      return <Steps items={block.items} />;
     case 'figure':
       return <Figure {...block} />;
     case 'gallery':
@@ -123,6 +123,13 @@ function Block({ block }) {
           </a>
           {block.note && <p className="download__note">{t(block.note)}</p>}
         </div>
+      );
+    case 'group':
+      return (
+        <section className="group">
+          {block.title && <h2 className="group__title">{t(block.title)}</h2>}
+          <Blocks blocks={block.blocks} />
+        </section>
       );
     case 'component': {
       const Widget = widgets[block.name];

@@ -3,18 +3,17 @@ export const areas = [
   {
     id: 'ecommerce',
     featured: true,
-    icon: 'cart',
     label: { en: 'Ecommerce', es: 'Ecommerce' },
     teaser: {
-      en: 'Almost 3 years at 123tinta, Ecommerce of the Year 2025 & 2026: categories, pricing, SEO, data and web.',
-      es: 'Casi 3 años en 123tinta, Ecommerce del año 2025 y 2026: categorías, precios, SEO, datos y web.',
+      en: 'Almost 3 years at 123tinta.es: categories, pricing, SEO, data and web.',
+      es: 'Casi 3 años en 123tinta.es: categorías, precios, SEO, datos y web.',
     },
     intro: [
       {
         type: 'p',
         text: {
-          en: 'Since January 2024 I have been working at **123tinta**, an online store for ink, toner, printers and office supplies with more than 20,000 SKUs, winner of the **Ecommerce of the Year award in 2025 and 2026**. My role touches almost every part of the business: categories, suppliers, pricing, promotions, SEO, data and even the code of the product pages.',
-          es: 'Desde enero de 2024 trabajo en **123tinta**, un ecommerce de tinta, tóner, impresoras y material de oficina con más de 20.000 referencias, ganador del **premio Ecommerce del año en 2025 y 2026**. Mi puesto toca casi todas las partes del negocio: categorías, proveedores, precios, promociones, SEO, datos e incluso el código de las fichas de producto.',
+          en: 'Since January 2024 I have been working at 123tinta.es, the Spanish store of 123inkt.nl, an international ecommerce company selling ink, toner, printers and office supplies, with more than 20,000 SKUs. My role touches almost every part of the business: categories, suppliers, pricing, promotions, SEO, data and even the code of the product pages.',
+          es: 'Desde enero de 2024 trabajo en 123tinta.es, la tienda española de 123inkt.nl, un ecommerce internacional de tinta, tóner, impresoras y material de oficina con más de 20.000 referencias. Mi puesto toca casi todas las partes del negocio: categorías, proveedores, precios, promociones, SEO, datos e incluso el código de las fichas de producto.',
         },
       },
     ],
@@ -22,7 +21,6 @@ export const areas = [
   },
   {
     id: 'category',
-    icon: 'grid',
     label: { en: 'Category Manager', es: 'Category Manager' },
     teaser: {
       en: 'New categories, assortment, suppliers and KPIs that move turnover.',
@@ -41,18 +39,17 @@ export const areas = [
   },
   {
     id: 'seo',
-    icon: 'search',
     label: { en: 'SEO Specialist', es: 'SEO Specialist' },
     teaser: {
-      en: 'About 2 years of SEO between my own projects and 123tinta.',
-      es: 'Unos 2 años de SEO entre proyectos propios y 123tinta.',
+      en: 'About 2 years of SEO between my own projects and 123tinta.es.',
+      es: 'Unos 2 años de SEO entre proyectos propios y 123tinta.es.',
     },
     intro: [
       {
         type: 'p',
         text: {
-          en: 'About two years of SEO experience, between my own projects and my work at 123tinta. Experience with SEO goals and keyword strategies, writing SEO-optimised content, and the logic behind search intent and keyword groups.',
-          es: 'Unos dos años de experiencia en SEO, entre proyectos propios y mi trabajo en 123tinta. Experiencia en metas y estrategias de keywords, en escribir contenido optimizado para SEO y en la lógica detrás de las intenciones de búsqueda y los grupos de keywords.',
+          en: 'About two years of SEO experience, between my own projects and my work at 123tinta.es. Experience with SEO goals and keyword strategies, writing SEO-optimised content, and the logic behind search intent and keyword groups.',
+          es: 'Unos dos años de experiencia en SEO, entre proyectos propios y mi trabajo en 123tinta.es. Experiencia en metas y estrategias de keywords, en escribir contenido optimizado para SEO y en la lógica detrás de las intenciones de búsqueda y los grupos de keywords.',
         },
       },
     ],
@@ -60,7 +57,6 @@ export const areas = [
   },
   {
     id: 'data',
-    icon: 'chart',
     label: { en: 'Data Analytics', es: 'Data Analytics' },
     teaser: {
       en: 'Advanced Excel, Power Query, pivot tables and dashboards, plus basic SQL.',
@@ -79,7 +75,6 @@ export const areas = [
   },
   {
     id: 'web',
-    icon: 'code',
     label: { en: 'Web Development', es: 'Web Development' },
     teaser: {
       en: 'HTML, CSS, JavaScript and React as an extra for digital marketing.',
@@ -106,6 +101,16 @@ export const areas = [
     projects: ['watchout-tours', 'tuhogartech', 'printer-page-design', 'wordpress-replica'],
   },
 ];
+
+areas.push({
+  id: 'other-skills',
+  label: { en: 'Other skills', es: 'Otras aptitudes' },
+  teaser: {
+    en: 'Email marketing, languages, international experience and Google Analytics.',
+    es: 'Email marketing, idiomas, experiencia internacional y Google Analytics.',
+  },
+  projects: [],
+});
 
 export const otherSkills = [
   {

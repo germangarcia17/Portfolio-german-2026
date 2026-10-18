@@ -16,10 +16,6 @@ export default function Footer() {
         </div>
         <ContactLinks compact />
       </div>
-      <div className="container site-footer__base">
-        <p>© {new Date().getFullYear()} {profile.name}</p>
-        <p>{t(ui.footer.built)}</p>
-      </div>
     </footer>
   );
 }

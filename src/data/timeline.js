@@ -5,13 +5,13 @@ export const timeline = [
     ongoing: true,
     kind: 'work',
     date: { en: 'Jan 2024 – Present', es: 'Ene 2024 – Actualidad' },
-    title: { en: '123tinta · Ecommerce', es: '123tinta · Ecommerce' },
+    title: { en: '123tinta.es (123inkt.nl) · Ecommerce', es: '123tinta.es (123inkt.nl) · Ecommerce' },
     text: {
-      en: 'Internship and then a full position at an award-winning ecommerce (20k+ SKUs): category management, suppliers, pricing, promotions, SEO and data analysis.',
-      es: 'Prácticas y después contrato en un ecommerce premiado (+20k SKUs): gestión de categorías, proveedores, precios, promociones, SEO y análisis de datos.',
+      en: 'Internship and then a full position at the Spanish store of an international ecommerce company (20k+ SKUs): category management, suppliers, pricing, promotions, SEO and data analysis.',
+      es: 'Prácticas y después contrato en la tienda española de un ecommerce internacional (+20k SKUs): gestión de categorías, proveedores, precios, promociones, SEO y análisis de datos.',
     },
     tags: ['Ecommerce', 'Category management', 'SEO'],
-    link: { to: '/?area=ecommerce', label: { en: 'See my ecommerce projects', es: 'Ver mis proyectos de ecommerce' } },
+    link: { to: '/area/ecommerce', label: { en: 'See my ecommerce projects', es: 'Ver mis proyectos de ecommerce' } },
   },
   {
     id: 'tuhogartech',
@@ -25,19 +25,6 @@ export const timeline = [
     },
     tags: ['SEO & GEO', 'Next.js', 'Affiliate marketing'],
     link: { to: '/projects/tuhogartech', label: { en: 'Read the case study', es: 'Ver el caso' } },
-  },
-  {
-    id: 'scrimba',
-    ongoing: true,
-    kind: 'study',
-    date: { en: 'Sep – Nov 2026', es: 'Sep – Nov 2026' },
-    title: { en: 'Scrimba · Frontend Developer Path', es: 'Scrimba · Frontend Developer Path' },
-    text: {
-      en: 'Frontend developer course: small projects with React, JavaScript, HTML and CSS. This portfolio is built with what I am learning there.',
-      es: 'Curso de desarrollo frontend: pequeños proyectos con React, JavaScript, HTML y CSS. Este portfolio está hecho con lo que estoy aprendiendo ahí.',
-    },
-    tags: ['React', 'JavaScript', 'Frontend'],
-    link: { to: '/?area=web', label: { en: 'See my web projects', es: 'Ver mis proyectos web' } },
   },
   {
     id: 'supplyforge',
@@ -57,11 +44,23 @@ export const timeline = [
     date: { en: 'Jul 2026', es: 'Jul 2026' },
     title: { en: 'Watchout Tours · Freelance web', es: 'Watchout Tours · Web freelance' },
     text: {
-      en: 'Bilingual website for a tour start-up in New Zealand: SEO for two markets, deployment and domains, and full accessibility tested with blind users.',
-      es: 'Web bilingüe para una startup de tours en Nueva Zelanda: SEO para dos mercados, despliegue y dominios, y accesibilidad total probada con usuarios ciegos.',
+      en: 'Bilingual website for a tour start-up in New Zealand aimed at blind people: full accessibility tested with blind users, SEO for two markets, deployment and domains.',
+      es: 'Web bilingüe para una startup de tours en Nueva Zelanda centrada en personas ciegas: accesibilidad total probada con usuarios ciegos, SEO para dos mercados, despliegue y dominios.',
     },
     tags: ['Web development', 'Accessibility', 'SEO'],
     link: { to: '/projects/watchout-tours', label: { en: 'Read the case study', es: 'Ver el caso' } },
+  },
+  {
+    id: 'scrimba',
+    kind: 'study',
+    date: { en: 'Sep – Nov 2025', es: 'Sep – Nov 2025' },
+    title: { en: 'Scrimba · Frontend Developer Path', es: 'Scrimba · Frontend Developer Path' },
+    text: {
+      en: 'Frontend developer course: small projects with React, JavaScript, HTML and CSS. This portfolio is built with what I learnt there.',
+      es: 'Curso de desarrollo frontend: pequeños proyectos con React, JavaScript, HTML y CSS. Este portfolio está hecho con lo que aprendí ahí.',
+    },
+    tags: ['React', 'JavaScript', 'Frontend'],
+    link: { to: '/area/web', label: { en: 'See my web projects', es: 'Ver mis proyectos web' } },
   },
   {
     id: 'urjc',
@@ -95,7 +94,6 @@ export const timeline = [
       es: 'Estudié inglés hasta el nivel C2 mientras trabajaba como recepcionista en el hostal The Villa, donde además fui manager temporal.',
     },
     tags: ['English C2', 'Leadership', 'Hospitality'],
-    link: { to: '/about#leadership', label: { en: 'Read about it', es: 'Leer más' } },
   },
   {
     id: 'ieb',
@@ -118,6 +116,6 @@ export const timeline = [
       es: 'Auditoría SEO de una web editorial con Screaming Frog y Lighthouse, entregada en un Excel con mejoras propuestas.',
     },
     tags: ['SEO audit', 'Screaming Frog', 'Lighthouse'],
-    link: { to: '/?area=seo&project=seo-consulting', label: { en: 'See the project', es: 'Ver el proyecto' } },
+    link: { to: '/area/seo?project=seo-consulting', label: { en: 'See the project', es: 'Ver el proyecto' } },
   },
 ];

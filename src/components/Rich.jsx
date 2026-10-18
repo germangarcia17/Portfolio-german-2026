@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 import { useLang } from '../i18n.jsx';
 
 // Minimal inline markup for content strings: **bold**, `code` and [label](href).
+// Bold is only kept as a lead-in label at the very start of a string ("**Label**: text");
+// anywhere else it renders as plain text, so body copy never highlights words.
 // Internal links (starting with "/") go through the router; external ones open in a new tab.
 const TOKEN = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g;
 const IS_TOKEN = /^(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))$/;
 
 function renderToken(token, key) {
-  if (token.startsWith('**')) return <strong key={key}>{token.slice(2, -2)}</strong>;
+  if (token.startsWith('**')) return key === 0 ? <strong key={key}>{token.slice(2, -2)}</strong> : token.slice(2, -2);
   if (token.startsWith('`')) return <code key={key} className="inline-code">{token.slice(1, -1)}</code>;
   const match = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
   if (match) {
