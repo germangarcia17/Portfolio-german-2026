@@ -21,8 +21,8 @@ export const about = {
         icon: 'people',
         title: { en: 'Excellent teamwork', es: 'Trabajo en equipo excelente' },
         text: {
-          en: 'I have never had a conflict with a colleague, and I have always been the one mediating when others did. Clear communication and very good relationships, with positive feedback from managers and colleagues, including other departments.',
-          es: 'Nunca he tenido conflictos con compañeros y siempre he mediado cuando los ha habido entre otros. Comunicación clara y muy buenas relaciones, con comentarios positivos de superiores y compañeros, incluidos los de otros departamentos.',
+          en: 'I am a non-conflict person, and I have always been the one mediating when others had conflicts. Clear communication and very good relationships, with positive feedback from managers and colleagues, including other departments.',
+          es: 'Soy una persona nada conflictiva y siempre he mediado cuando ha habido conflictos entre otros. Comunicación clara y muy buenas relaciones, con comentarios positivos de superiores y compañeros, incluidos los de otros departamentos.',
         },
       },
       {
@@ -48,8 +48,8 @@ export const about = {
         icon: 'flag',
         title: { en: 'Leadership', es: 'Liderazgo' },
         text: {
-          en: 'During four months in New Zealand I worked three hours a day as a hostel receptionist. When the manager had to leave for a month, she left me in charge: I led and organised the team, recruited new people and solved the day-to-day problems of the hostel.',
-          es: 'Durante 4 meses en Nueva Zelanda trabajé 3 horas al día como recepcionista en un hostal. Cuando la manager tuvo que irse un mes, me dejó a cargo: lideré y organicé al equipo, incorporé a nuevas personas y solucioné los problemas del día a día del hostal.',
+          en: 'During four months in New Zealand I worked three hours a day in customer service at a hostel, and I was promoted to manager: I led and organised the team, recruited new people and solved the day-to-day problems of the hostel.',
+          es: 'Durante 4 meses en Nueva Zelanda trabajé 3 horas al día en servicio al cliente en un hostal, y fui ascendido a manager: lideré y organicé al equipo, incorporé a nuevas personas y solucioné los problemas del día a día del hostal.',
         },
       },
     ],
