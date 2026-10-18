@@ -50,7 +50,7 @@ export function CaseStudyCard({ project, fromArea }) {
   );
 }
 
-// A smaller project: the card itself expands in place to reveal the details.
+// A smaller project: no image; the card itself expands in place to reveal the details.
 export function ExpandCard({ project, initiallyOpen = false }) {
   const { t } = useLang();
   const [open, setOpen] = useState(initiallyOpen);
@@ -73,7 +73,6 @@ export function ExpandCard({ project, initiallyOpen = false }) {
         aria-controls={panelId}
         onClick={() => setOpen((o) => !o)}
       >
-        <Cover project={project} />
         <span className="pcard__body">
           <span className="pcard__org">{t(project.org)}</span>
           <span className="pcard__title">{t(project.title)}</span>

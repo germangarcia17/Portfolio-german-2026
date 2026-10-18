@@ -507,8 +507,7 @@ strong {
   transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s var(--ease);
 }
 
-.pcard--page,
-.pcard__trigger {
+.pcard--page {
   display: grid;
   grid-template-columns: 300px 1fr;
   align-items: stretch;
@@ -526,6 +525,7 @@ strong {
 }
 
 .pcard__trigger {
+  display: block;
   width: 100%;
   padding: 0;
   border: 0;
@@ -643,7 +643,7 @@ strong {
 }
 
 .pcard__details {
-  margin: 0 26px 24px calc(300px + 26px);
+  margin: 0 26px 24px;
   padding-top: 18px;
   border-top: 1px dashed var(--line-strong);
 }
@@ -1818,13 +1818,8 @@ strong {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .pcard--page,
-  .pcard__trigger {
+  .pcard--page {
     grid-template-columns: 220px 1fr;
-  }
-
-  .pcard__details {
-    margin-left: calc(220px + 26px);
   }
 
   .levers {
@@ -1866,8 +1861,7 @@ strong {
     padding: 8px 16px;
   }
 
-  .pcard--page,
-  .pcard__trigger {
+  .pcard--page {
     grid-template-columns: 1fr;
   }
 

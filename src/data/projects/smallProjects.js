@@ -1,4 +1,4 @@
-import { p, list, link } from './helpers.js';
+import { p, list, img, link } from './helpers.js';
 
 // Smaller projects: no page of their own, they expand in place.
 export const crm = {
@@ -6,7 +6,6 @@ export const crm = {
   kind: 'expand',
   areas: ['ecommerce'],
   org: '123tinta.es',
-  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
   title: { en: 'Catalogue & CRM management (20k+ SKUs)', es: 'Gestión de catálogo y CRM (+20k SKUs)' },
   summary: {
     en: 'My day-to-day at 123tinta.es: content, pricing, stock, suppliers, promotions and brand strategy for a catalogue of more than 20,000 references.',
@@ -29,7 +28,6 @@ export const buyer = {
   kind: 'expand',
   areas: ['ecommerce', 'category'],
   org: '123tinta.es',
-  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
   title: { en: 'Buyer experience', es: 'Experiencia como buyer' },
   summary: {
     en: 'Supplier management end to end: feeds, promotions, quotes, demand forecasting, stock coverage, EOL alternatives and cost control.',
@@ -53,7 +51,6 @@ export const promotions = {
   kind: 'expand',
   areas: ['ecommerce'],
   org: '123tinta.es',
-  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
   title: { en: 'Promotions management', es: 'Gestión de promociones' },
   summary: {
     en: 'Planning promotions in key categories ahead of time, selecting the products for the newsletters, and packs and discounts to clear overstock.',
@@ -73,7 +70,6 @@ export const fans = {
   kind: 'expand',
   areas: ['category'],
   org: '123tinta.es',
-  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
   title: { en: 'Improving the fans and paper shredders categories', es: 'Mejora de las categorías de ventiladores y destructoras' },
   summary: {
     en: 'Improving, expanding and reorganising two categories, with stock supply and sales follow-up. Fans had very positive results in summer.',
@@ -96,7 +92,6 @@ export const opportunities = {
   kind: 'expand',
   areas: ['category'],
   org: '123tinta.es',
-  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
   title: { en: 'Finding business opportunities', es: 'Encontrar oportunidades de negocio' },
   summary: {
     en: 'Competitor, reference and supplier analysis that turned cash register rolls into a top-10 category.',
@@ -115,7 +110,6 @@ export const kpis = {
   kind: 'expand',
   areas: ['category'],
   org: '123tinta.es',
-  cover: { src: '/images/123tinta-cover.webp', width: 800, height: 500, contain: true },
   title: { en: 'KPI management', es: 'Gestión de KPIs' },
   summary: {
     en: 'General and post-promotion KPI analysis: turnover of the main categories is up 11% since 2025.',
@@ -153,7 +147,6 @@ export const wordpress = {
   kind: 'expand',
   areas: ['web'],
   org: { en: 'Learning project', es: 'Proyecto de aprendizaje' },
-  cover: { src: '/images/furniture-project.webp', width: 1600, height: 749 },
   title: { en: 'From a WordPress design to hand-written code', es: 'De un diseño de WordPress a código escrito a mano' },
   summary: {
     en: 'A furniture website recreated entirely by hand in HTML and CSS: proof that I can take a design and turn it into code.',
@@ -165,5 +158,6 @@ export const wordpress = {
       'A design created completely by hand during my learning process: everything is HTML and CSS except the mobile drop-down menu. It is a copy of a WordPress design, a way to show that I can take a Figma design and build it with code. No assistance at all, every line written by hand. (This portfolio uses its colour palette.)',
       'Diseño creado completamente a mano en mi proceso de aprendizaje: todo HTML y CSS excepto el menú desplegable en móvil. Es una copia de un diseño de WordPress, una forma de mostrar que puedo coger un diseño de Figma y crearlo con código. Ninguna asistencia, escrito todo completamente a mano. (Este portfolio usa su paleta de colores.)'
     ),
+    img('furniture-project', { en: 'Furniture website with kitchen, living room and bedroom cards', es: 'Web de muebles con tarjetas de cocina, salón y dormitorio' }),
   ],
 };
