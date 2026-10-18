@@ -1,0 +1,123 @@
+// Most recent first; ongoing items lead the list.
+export const timeline = [
+  {
+    id: '123tinta',
+    ongoing: true,
+    kind: 'work',
+    date: { en: 'Jan 2024 – Present', es: 'Ene 2024 – Actualidad' },
+    title: { en: '123tinta · Ecommerce', es: '123tinta · Ecommerce' },
+    text: {
+      en: 'Internship and then a full position at an award-winning ecommerce (20k+ SKUs): category management, suppliers, pricing, promotions, SEO and data analysis.',
+      es: 'Prácticas y después contrato en un ecommerce premiado (+20k SKUs): gestión de categorías, proveedores, precios, promociones, SEO y análisis de datos.',
+    },
+    tags: ['Ecommerce', 'Category management', 'SEO'],
+    link: { to: '/?area=ecommerce', label: { en: 'See my ecommerce projects', es: 'Ver mis proyectos de ecommerce' } },
+  },
+  {
+    id: 'tuhogartech',
+    ongoing: true,
+    kind: 'project',
+    date: { en: 'Feb 2026 – Present', es: 'Feb 2026 – Actualidad' },
+    title: { en: 'Tu Hogar Tech · Own project', es: 'Tu Hogar Tech · Proyecto propio' },
+    text: {
+      en: 'Amazon affiliate website built with Next.js and Supabase: 400+ SEO-optimised pages, keyword strategy by intent and two blog posts a week.',
+      es: 'Web de afiliados de Amazon construida con Next.js y Supabase: más de 400 páginas optimizadas para SEO, estrategia de keywords por intención y dos blogs a la semana.',
+    },
+    tags: ['SEO & GEO', 'Next.js', 'Affiliate marketing'],
+    link: { to: '/projects/tuhogartech', label: { en: 'Read the case study', es: 'Ver el caso' } },
+  },
+  {
+    id: 'scrimba',
+    ongoing: true,
+    kind: 'study',
+    date: { en: 'Sep – Nov 2026', es: 'Sep – Nov 2026' },
+    title: { en: 'Scrimba · Frontend Developer Path', es: 'Scrimba · Frontend Developer Path' },
+    text: {
+      en: 'Frontend developer course: small projects with React, JavaScript, HTML and CSS. This portfolio is built with what I am learning there.',
+      es: 'Curso de desarrollo frontend: pequeños proyectos con React, JavaScript, HTML y CSS. Este portfolio está hecho con lo que estoy aprendiendo ahí.',
+    },
+    tags: ['React', 'JavaScript', 'Frontend'],
+    link: { to: '/?area=web', label: { en: 'See my web projects', es: 'Ver mis proyectos web' } },
+  },
+  {
+    id: 'supplyforge',
+    kind: 'project',
+    date: { en: 'Oct 2026', es: 'Oct 2026' },
+    title: { en: 'SupplyForge · Data project', es: 'SupplyForge · Proyecto de datos' },
+    text: {
+      en: 'End-to-end stock analysis for a fake fasteners store: SQL in Supabase, Power Query and an Excel dashboard answering what to reorder and where the risk is.',
+      es: 'Análisis de stock de principio a fin para una tienda de tornillería ficticia: SQL en Supabase, Power Query y un dashboard en Excel que responde qué reponer y dónde está el riesgo.',
+    },
+    tags: ['SQL', 'Power Query', 'Excel'],
+    link: { to: '/projects/supplyforge', label: { en: 'Read the case study', es: 'Ver el caso' } },
+  },
+  {
+    id: 'watchout',
+    kind: 'work',
+    date: { en: 'Jul 2026', es: 'Jul 2026' },
+    title: { en: 'Watchout Tours · Freelance web', es: 'Watchout Tours · Web freelance' },
+    text: {
+      en: 'Bilingual website for a tour start-up in New Zealand: SEO for two markets, deployment and domains, and full accessibility tested with blind users.',
+      es: 'Web bilingüe para una startup de tours en Nueva Zelanda: SEO para dos mercados, despliegue y dominios, y accesibilidad total probada con usuarios ciegos.',
+    },
+    tags: ['Web development', 'Accessibility', 'SEO'],
+    link: { to: '/projects/watchout-tours', label: { en: 'Read the case study', es: 'Ver el caso' } },
+  },
+  {
+    id: 'urjc',
+    kind: 'study',
+    date: { en: '2020 – 2024', es: '2020 – 2024' },
+    title: { en: 'Degree in Marketing · URJC', es: 'Grado en Marketing · URJC' },
+    text: {
+      en: 'Marketing degree at Universidad Rey Juan Carlos (Madrid), with a focus on digital marketing. Final GPA: 8.1.',
+      es: 'Grado en Marketing en la Universidad Rey Juan Carlos (Madrid), con foco en marketing digital. Nota media: 8,1.',
+    },
+    tags: ['Digital marketing', 'Degree', 'GPA 8.1'],
+  },
+  {
+    id: 'vaasa',
+    kind: 'study',
+    date: { en: '2023', es: '2023' },
+    title: { en: 'Semester at the University of Vaasa · Finland', es: 'Cuatrimestre en la Universidad de Vaasa · Finlandia' },
+    text: {
+      en: 'A semester studying at Vaasan yliopisto: international environment and teamwork with students from many countries.',
+      es: 'Un cuatrimestre cursando en la Vaasan yliopisto: ambiente internacional y trabajo en equipo con estudiantes de muchos países.',
+    },
+    tags: ['International', 'Teamwork', 'Finland'],
+  },
+  {
+    id: 'new-zealand',
+    kind: 'work',
+    date: { en: '2023', es: '2023' },
+    title: { en: '4 months in New Zealand', es: '4 meses en Nueva Zelanda' },
+    text: {
+      en: 'Studied English up to C2 level while working as a receptionist at The Villa hostel, where I also stepped in as temporary manager.',
+      es: 'Estudié inglés hasta el nivel C2 mientras trabajaba como recepcionista en el hostal The Villa, donde además fui manager temporal.',
+    },
+    tags: ['English C2', 'Leadership', 'Hospitality'],
+    link: { to: '/about#leadership', label: { en: 'Read about it', es: 'Leer más' } },
+  },
+  {
+    id: 'ieb',
+    kind: 'study',
+    date: { en: '2022', es: '2022' },
+    title: { en: 'Advanced Digital Marketing course · IEB', es: 'Curso de Marketing Digital Avanzado · IEB' },
+    text: {
+      en: 'Advanced digital marketing course at the IEB business school, where I learnt, among other things, how to run SEO audits.',
+      es: 'Curso de marketing digital avanzado en la escuela de negocios IEB, donde aprendí, entre otras cosas, a realizar auditorías SEO.',
+    },
+    tags: ['Digital marketing', 'SEO', 'Analytics'],
+  },
+  {
+    id: 'seo-consulting',
+    kind: 'work',
+    date: { en: '2022', es: '2022' },
+    title: { en: 'SEO consulting · Editorial website', es: 'Asesoría SEO · Web editorial' },
+    text: {
+      en: 'SEO audit of an editorial website with Screaming Frog and Lighthouse, delivered as an Excel file of proposed improvements.',
+      es: 'Auditoría SEO de una web editorial con Screaming Frog y Lighthouse, entregada en un Excel con mejoras propuestas.',
+    },
+    tags: ['SEO audit', 'Screaming Frog', 'Lighthouse'],
+    link: { to: '/?area=seo&project=seo-consulting', label: { en: 'See the project', es: 'Ver el proyecto' } },
+  },
+];

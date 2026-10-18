@@ -1,0 +1,67 @@
+// Interface strings shared across pages.
+export const ui = {
+  nav: {
+    projects: { en: 'Projects', es: 'Proyectos' },
+    about: { en: 'About me', es: 'Sobre mí' },
+    timeline: { en: 'Timeline', es: 'Trayectoria' },
+  },
+  langSwitch: { en: 'Cambiar a español', es: 'Switch to English' },
+  skip: { en: 'Skip to content', es: 'Saltar al contenido' },
+  hello: { en: 'Hi, I’m', es: 'Hola, soy' },
+  contact: {
+    email: { en: 'Email me', es: 'Escríbeme' },
+    linkedin: { en: 'LinkedIn', es: 'LinkedIn' },
+    phone: { en: 'Call', es: 'Llamar' },
+    title: { en: 'Let’s talk', es: 'Hablemos' },
+    text: {
+      en: 'Open to roles in ecommerce, category management, SEO and data. Based in Madrid, happy to work in international teams.',
+      es: 'Abierto a puestos de ecommerce, category management, SEO y datos. Vivo en Madrid y me encanta trabajar en equipos internacionales.',
+    },
+  },
+  question: {
+    en: 'Which part of my experience would you like to know more about?',
+    es: '¿Sobre qué parte de mi experiencia quieres saber más?',
+  },
+  questionHint: {
+    en: 'Pick the area closest to the role you are hiring for. Projects are shared between areas, so you will never miss the important ones.',
+    es: 'Elige el área más cercana al puesto que buscas. Los proyectos se comparten entre áreas, así que no te perderás los importantes.',
+  },
+  mainFocus: { en: 'Main focus', es: 'Área principal' },
+  projectsIn: { en: 'Projects in', es: 'Proyectos de' },
+  caseStudy: { en: 'Case study', es: 'Caso de estudio' },
+  quick: { en: 'Quick look', es: 'Vista rápida' },
+  viewCase: { en: 'Read the case study', es: 'Ver el caso completo' },
+  showMore: { en: 'Show details', es: 'Ver detalles' },
+  showLess: { en: 'Hide details', es: 'Ocultar detalles' },
+  alsoIn: { en: 'Also in', es: 'También en' },
+  backToProjects: { en: 'Back to projects', es: 'Volver a proyectos' },
+  visitSite: { en: 'Visit live page', es: 'Ver página en vivo' },
+  steps: { en: 'Step by step', es: 'Paso a paso' },
+  stepHint: {
+    en: 'Click on a step to expand it.',
+    es: 'Pulsa en un paso para desplegarlo.',
+  },
+  expandAll: { en: 'Expand all', es: 'Desplegar todo' },
+  collapseAll: { en: 'Collapse all', es: 'Plegar todo' },
+  step: { en: 'Step', es: 'Paso' },
+  otherSkills: { en: 'Other skills', es: 'Otras aptitudes' },
+  zoom: { en: 'Click to enlarge', es: 'Pulsa para ampliar' },
+  close: { en: 'Close', es: 'Cerrar' },
+  copy: { en: 'Copy', es: 'Copiar' },
+  copied: { en: 'Copied', es: 'Copiado' },
+  nextProject: { en: 'Next case study', es: 'Siguiente caso' },
+  present: { en: 'Present', es: 'Actualidad' },
+  ongoing: { en: 'Ongoing', es: 'En curso' },
+  notFound: {
+    title: { en: 'Page not found', es: 'Página no encontrada' },
+    text: { en: 'This page doesn’t exist, but my projects do.', es: 'Esta página no existe, pero mis proyectos sí.' },
+  },
+  footer: {
+    built: {
+      en: 'Designed and built with React, JavaScript, HTML and CSS.',
+      es: 'Diseñado y desarrollado con React, JavaScript, HTML y CSS.',
+    },
+  },
+  plusLabel: { en: 'Good to know', es: 'Información extra' },
+  alertLabel: { en: 'Heads-up', es: 'Aviso' },
+};
