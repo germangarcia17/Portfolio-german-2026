@@ -60,25 +60,6 @@ join products p on p.id = sa.product_id
 group by p.category
 order by tasa_devolucion_pct desc;`;
 
-const pqSteps = [
-  ['Origen', 'Source: reads stock_actual.csv (UTF-8 encoding).', 'Origen: lee stock_actual.csv (codificación UTF-8).'],
-  ['Encabezados promovidos', 'Promote the first row to column headers.', 'Convierte la primera fila en encabezados.'],
-  ['Tipo cambiado', 'Explicit types: text, whole number, currency and date.', 'Tipos explícitos: texto, número entero, moneda y fecha.'],
-  ['duplicar columna sku / cambiar nombre', 'Duplicate the SKU column and rename it Stock_por_SKU.', 'Duplica la columna SKU y la renombra a Stock_por_SKU.'],
-  ['agrupar por sku, cat y name', 'Group by SKU, name, category and price, summing available units across the 5 warehouses: one row per product.', 'Agrupa por SKU, nombre, categoría y precio sumando las unidades disponibles de los 5 almacenes: una fila por producto.'],
-  ['combinar con ventas 90dias', 'Left outer join with ventas_90d on SKU, keeping products with no sales.', 'Combinación externa izquierda con ventas_90d por SKU, conservando los productos sin ventas.'],
-  ['combinar con proveedores', 'Left outer join with the Purchasing file on category: supplier, lead time and cost %.', 'Combinación externa izquierda con el archivo de Compras por categoría: proveedor, plazo y % de coste.'],
-  ['ventas diarias', 'Daily sales = net units in 90 days / 90.', 'Ventas diarias = unidades netas en 90 días / 90.'],
-  ['reemplazar null por 0', 'A product with no sales counts as 0.', 'Un producto sin ventas cuenta como 0.'],
-  ['cobertura', 'Days of cover = available units / daily sales.', 'Días de cobertura = unidades disponibles / ventas diarias.'],
-  ['stock objetivo', 'Target stock = daily sales × (supplier lead time + 30 campaign days).', 'Stock objetivo = ventas diarias × (plazo del proveedor + 30 días de campaña).'],
-  ['uds a pedir', 'Units to order = round up (max(0, target − available)).', 'Unidades a pedir = redondeo al alza (máx(0, objetivo − disponible)).'],
-  ['coste pedido', 'Order cost = units to order × cost % × price.', 'Coste del pedido = unidades a pedir × % de coste × precio.'],
-  ['estado', 'Status, checked in order: Out of stock → Dead stock → Reorder now → Overstock (>180 days) → OK.', 'Estado, evaluado en orden: Roto → Stock muerto → Pedir ya → Sobrestock (>180 días) → OK.'],
-  ['valor_stock', 'Stock value = available × price × cost %, always at purchase cost.', 'Valor de stock = disponible × precio × % de coste, siempre a coste de compra.'],
-  ['ordenar / sustituir null', 'Sort by 90-day revenue (ready for ABC) and replace empty revenue with 0.', 'Ordena por ingresos de 90 días (listo para el ABC) y sustituye los ingresos vacíos por 0.'],
-];
-
 export default {
   slug: 'supplyforge',
   kind: 'page',
@@ -239,15 +220,9 @@ export default {
             img('sf-csv-files', { en: 'The four exported CSV files', es: 'Los cuatro CSV exportados' }, { en: 'The four exports from Supabase.', es: 'Los cuatro exports de Supabase.' }),
             img('sf-pq-suppliers', { en: 'Supplier table in Power Query with lead times and cost percentages', es: 'Tabla de proveedores en Power Query con plazos y porcentajes de coste' }, { en: 'Purchasing file: supplier, lead time (days) and purchase cost as % of the selling price, per category.', es: 'Archivo de Compras: proveedor, plazo (días) y coste de compra como % del precio de venta, por categoría.' }),
             p(
-              'The main query, `stock_actual`, turns 12,425 product–warehouse rows into one row per product (4,962) and adds every calculation the brief asks for. These are its applied steps, translated:',
-              'La consulta principal, `stock_actual`, convierte las 12.425 filas producto–almacén en una fila por producto (4.962) y añade todos los cálculos que pide el encargo. Estos son sus pasos aplicados, traducidos:'
+              'The main query, `stock_actual`, turns 12,425 product–warehouse rows into one row per product (4,962) and adds every calculation the brief asks for: daily sales, days of cover, target stock, units to order, order cost, the status of each product (out of stock, dead stock, reorder now, overstock or OK) and the stock value at purchase cost.',
+              'La consulta principal, `stock_actual`, convierte las 12.425 filas producto–almacén en una fila por producto (4.962) y añade todos los cálculos que pide el encargo: ventas diarias, días de cobertura, stock objetivo, unidades a pedir, coste del pedido, el estado de cada producto (roto, stock muerto, pedir ya, sobrestock u OK) y el valor del stock a coste de compra.'
             ),
-            {
-              type: 'table',
-              caption: { en: 'Applied steps in stock_actual', es: 'Pasos aplicados en stock_actual' },
-              head: [{ en: 'Step (original name)', es: 'Paso (nombre original)' }, { en: 'What it does', es: 'Qué hace' }],
-              rows: pqSteps.map(([step, en, es]) => [step, { en, es }]),
-            },
             {
               type: 'gallery',
               items: [
