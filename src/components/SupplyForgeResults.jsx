@@ -67,9 +67,32 @@ const copy = {
   ],
   recoTitle: { en: 'My recommendation', es: 'Mi recomendación' },
   reco: {
-    en: 'Place the €164k order before the campaign, starting with the A-class stock-outs, and prioritise transfers to Barcelona. At the same time, the real lever for cash is not buying less but selling the overstock: B2B packs and campaign discounts on the products with the most days of cover.',
-    es: 'Lanzar el pedido de 164 k€ antes de la campaña, empezando por las roturas de clase A, y priorizar los traspasos hacia Barcelona. A la vez, la verdadera palanca de caja no es comprar menos sino vender el sobrestock: packs B2B y descuentos de campaña en los productos con más días de cobertura.',
+    en: 'Place the €164k order before the campaign, starting with the A-class stock-outs, and prioritise transfers to Barcelona. At the same time, the real lever for cash is not buying less but **liquidating the dead stock and the overstock** (the products with the most days of cover), in three ways:',
+    es: 'Lanzar el pedido de 164 k€ antes de la campaña, empezando por las roturas de clase A, y priorizar los traspasos hacia Barcelona. A la vez, la verdadera palanca de caja no es comprar menos sino **liquidar el stock muerto y el sobrestock** (los productos con más días de cobertura), de tres formas:',
   },
+  levers: [
+    {
+      title: { en: 'Discounts', es: 'Descuentos' },
+      text: {
+        en: 'Campaign discounts on the products with the most days of cover, stronger on the dead stock.',
+        es: 'Descuentos de campaña en los productos con más días de cobertura, más agresivos en el stock muerto.',
+      },
+    },
+    {
+      title: { en: 'Packs with best-sellers', es: 'Packs con productos de alta venta' },
+      text: {
+        en: 'Bundle slow movers with high-selling (A-class) products, so the demand that already exists pulls out the stock that doesn’t move.',
+        es: 'Combinar los productos que no rotan con productos de alta venta (clase A), para que la demanda que ya existe arrastre el stock parado.',
+      },
+    },
+    {
+      title: { en: 'Newsletter', es: 'Newsletter' },
+      text: {
+        en: 'Promote those offers and packs by newsletter, especially to B2B customers ahead of the November campaign.',
+        es: 'Promocionar esas ofertas y packs por newsletter, sobre todo a los clientes B2B antes de la campaña de noviembre.',
+      },
+    },
+  ],
   rankTitle: { en: 'Warehouse ranking · % of products below minimum', es: 'Ranking de almacenes · % de productos bajo mínimo' },
   status: {
     critical: { en: 'Worst', es: 'Peor' },
@@ -278,7 +301,18 @@ export default function SupplyForgeResults() {
 
       <div className="reco">
         <h3 className="sf-results__title">{t(copy.recoTitle)}</h3>
-        <p>{t(copy.reco)}</p>
+        <Rich as="p" text={copy.reco} />
+        <ol className="levers">
+          {copy.levers.map((lever, i) => (
+            <li key={i} className="lever">
+              <span className="lever__num" aria-hidden="true">{i + 1}</span>
+              <span>
+                <strong>{t(lever.title)}</strong>
+                {t(lever.text)}
+              </span>
+            </li>
+          ))}
+        </ol>
       </div>
     </div>
   );

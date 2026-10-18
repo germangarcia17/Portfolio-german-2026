@@ -1,7 +1,7 @@
-import { p, list, img, plus, alert } from './helpers.js';
+import { p, list, img, plus, alert, link } from './helpers.js';
 
 // Set this to the public URL of the SupplyForge demo shop to show a "visit" button.
-export const SUPPLYFORGE_URL = null;
+export const SUPPLYFORGE_URL = 'https://supplyforge.netlify.app/';
 
 const sql1 = `select w.code as almacen,
        count(*) as productos,
@@ -160,6 +160,7 @@ export default {
       'Todos los datos y la web son falsos. La web se creó para dar credibilidad al proyecto del portfolio y mostrar los elementos importantes al crear un ecommerce: recomendaciones, pedir la cuenta después del carrito para que el cliente no abandone, familias de producto en la ficha para moverse rápido a otros tamaños y colores, categorización, ofertas y descuentos, buscador y filtros, ventajas y puntos fuertes de la marca resaltados y opción para retailers o B2B con herramienta para añadir un listado desde Excel o de forma rápida.',
       { en: 'Ecommerce strategy behind the site', es: 'Estrategia de ecommerce detrás de la web' }
     ),
+    link(SUPPLYFORGE_URL, 'Visit the SupplyForge website', 'Visitar la web de SupplyForge'),
     { type: 'h', text: { en: 'The brief', es: 'El encargo' } },
     p(
       'SupplyForge sells fasteners and tools online from **5 warehouses in Spain** (Madrid, Barcelona, Valencia, Seville and Bilbao). Before the November B2B campaign, the Head of Operations needs an Excel workbook for Monday’s meeting that answers three questions:',
