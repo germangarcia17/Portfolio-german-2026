@@ -3,7 +3,6 @@ import { useLang } from '../i18n.jsx';
 import { ui } from '../data/ui.js';
 import { areas, otherSkills } from '../data/areas.js';
 import { projects } from '../data/projects/index.js';
-import Reveal from '../components/Reveal.jsx';
 import Icon from '../components/Icon.jsx';
 import Blocks from '../components/Blocks.jsx';
 import { CaseStudyCard, ExpandCard } from '../components/ProjectCard.jsx';
@@ -15,10 +14,10 @@ function SkillsList() {
   return (
     <ul className="skills">
       {otherSkills.map((skill, i) => (
-        <Reveal as="li" key={i} delay={(i % 3) * 60} className="skill">
+        <li key={i} className="skill">
           <h2 className="skill__title">{t(skill.title)}</h2>
           <p className="skill__text">{t(skill.text)}</p>
-        </Reveal>
+        </li>
       ))}
     </ul>
   );
@@ -57,13 +56,13 @@ export default function AreaPage() {
         ) : (
           <ul className="project-list">
             {list.map((project) => (
-              <Reveal as="li" key={project.slug}>
+              <li key={project.slug}>
                 {project.kind === 'page' ? (
                   <CaseStudyCard project={project} fromArea={area.id} />
                 ) : (
                   <ExpandCard project={project} initiallyOpen={openProject === project.slug} />
                 )}
-              </Reveal>
+              </li>
             ))}
           </ul>
         )}
