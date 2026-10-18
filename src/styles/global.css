@@ -321,22 +321,27 @@ strong {
   color: var(--ink-2);
   font-weight: 500;
   font-size: 0.98rem;
-  transition: color 0.2s, background-color 0.2s;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+  transition: color 0.2s, text-decoration-color 0.2s;
 }
 
 .main-nav__link:hover {
   color: var(--accent);
-  background: var(--accent-tint);
 }
 
 .main-nav__link.active {
   color: var(--accent);
-  background: var(--accent-soft);
+  text-decoration-color: currentColor;
 }
 
+/* Projects: bigger than the other links and sitting 4px lower. */
 .main-nav__link--main {
+  position: relative;
+  top: 4px;
   font-size: 1.2rem;
-  font-weight: 600;
   padding: 9px 22px;
 }
 
@@ -353,12 +358,10 @@ strong {
 .lang-toggle__btn {
   border: 0;
   background: transparent;
-  min-width: 52px;
   padding: 8px 14px;
   border-radius: var(--radius);
   font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.06em;
+  font-size: 0.95rem;
   color: var(--accent);
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
@@ -380,9 +383,10 @@ strong {
 
 .picker__question {
   font-size: clamp(1.7rem, 3.6vw, 2.5rem);
-  max-width: 24ch;
+  max-width: 26ch;
+  margin: 0 auto 36px;
+  text-align: center;
   letter-spacing: -0.02em;
-  margin-bottom: 32px;
 }
 
 .picker__grid {
@@ -1920,8 +1924,8 @@ strong {
   }
 
   .lang-toggle__btn {
-    min-width: 46px;
     padding: 7px 11px;
+    font-size: 0.88rem;
   }
 
   .callout {

@@ -2,6 +2,7 @@ import { useLang } from '../i18n.jsx';
 import { ui } from '../data/ui.js';
 
 // Big, always-visible language switch. English is the default.
+const labels = { en: 'English', es: 'Español' };
 export default function LangToggle() {
   const { lang, setLang, t } = useLang();
   return (
@@ -15,7 +16,7 @@ export default function LangToggle() {
           aria-pressed={lang === code}
           onClick={() => setLang(code)}
         >
-          {code.toUpperCase()}
+          {labels[code]}
         </button>
       ))}
     </div>

@@ -19,8 +19,8 @@ export const ui = {
     },
   },
   question: {
-    en: 'Which part of my experience would you like to know more about?',
-    es: '¿Sobre qué parte de mi experiencia quieres saber más?',
+    en: 'Which of my areas of expertise are you more interested in?',
+    es: '¿Qué área de mi experiencia te interesa más?',
   },
   questionHint: {
     en: 'Pick the area closest to the role you are hiring for. Projects are shared between areas, so you will never miss the important ones.',
