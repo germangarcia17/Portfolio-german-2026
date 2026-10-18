@@ -3,7 +3,6 @@ import { useLang } from '../i18n.jsx';
 import { ui } from '../data/ui.js';
 import { profile } from '../data/profile.js';
 import { areas } from '../data/areas.js';
-import Reveal from '../components/Reveal.jsx';
 import Icon from '../components/Icon.jsx';
 import ContactLinks from '../components/ContactLinks.jsx';
 import useDocumentTitle from '../useDocumentTitle.js';
@@ -32,7 +31,7 @@ function Hero() {
   );
 }
 
-// The Projects page: a short introduction, then the question and the fields.
+// The Projects page: a short introduction, then the question and the fields (no entrance animations).
 // Each field has its own page with its projects.
 export default function Home() {
   const { t } = useLang();
@@ -43,12 +42,10 @@ export default function Home() {
       <Hero />
       <section className="picker" aria-labelledby="picker-title">
         <div className="container">
-          <Reveal>
-            <h2 id="picker-title" className="picker__question">{t(ui.question)}</h2>
-          </Reveal>
+          <h2 id="picker-title" className="picker__question">{t(ui.question)}</h2>
           <ul className="picker__grid">
-            {areas.map((area, i) => (
-              <Reveal as="li" key={area.id} delay={i * 60}>
+            {areas.map((area) => (
+              <li key={area.id}>
                 <Link to={`/area/${area.id}`} className="area-card">
                   <span className="area-card__label">
                     {t(area.label)}
@@ -57,7 +54,7 @@ export default function Home() {
                   <span className="area-card__teaser">{t(area.teaser)}</span>
                   <Icon name="arrowRight" size={20} className="area-card__arrow" />
                 </Link>
-              </Reveal>
+              </li>
             ))}
           </ul>
         </div>
